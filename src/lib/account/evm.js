@@ -7,19 +7,13 @@ class EvmAccount {
   network = NETWORK.EVM;
   chainId = null;
   networkInfo = null;
-  signer = null;
-  account = null;
-  provider = null;
   address = null;
-  activated = true;
 
   constructor(hashKey, chainId) {
     this.chainId = chainId;
     this.networkInfo = EVM_NETWORKS.find((n) => n.chainId === chainId);
-    this.provider = new ethers.JsonRpcProvider(this.networkInfo.provider);
-    this.signer = getEvmPrivateKey(hashKey);
-    this.account = new ethers.Wallet(this.signer, this.provider);
-    this.address = this.account.address;
+    const signer = getEvmPrivateKey(hashKey);
+    this.address = ethers.computeAddress(signer);
   }
 
   linkOfAddress(address) {
