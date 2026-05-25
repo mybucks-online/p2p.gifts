@@ -37,7 +37,7 @@ const Frame = styled.div`
   overflow: hidden;
   isolation: isolate;
   border-radius: calc(
-    ${({ theme }) => theme.radius.lg} * var(--gift-card-preview-scale)
+    ${({ theme }) => theme.radius.form} * var(--gift-card-preview-scale)
   );
 `;
 

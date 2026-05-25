@@ -13,7 +13,7 @@ const CardRoot = styled.div`
   width: ${GIFT_CARD_WIDTH_REM}rem;
   aspect-ratio: ${GIFT_CARD_ASPECT_RATIO};
   position: relative;
-  border-radius: ${({ theme }) => theme.radius.lg};
+  border-radius: ${({ theme }) => theme.radius.form};
   padding: ${({ theme }) => theme.sizes.lg};
   display: grid;
   grid-template-columns: 1fr auto;
