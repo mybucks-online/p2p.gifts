@@ -11,5 +11,5 @@ export const CLAIM_APP_ORIGIN = "https://app.mybucks.online";
 /** Wallet stack credit on gift cards and footer */
 export const POWERED_BY = Object.freeze({
   label: "mybucks.online",
-  url: "https://mybucks.online",
+  url: "https://mybucks.online?utm_source=p2p.gifts",
 });
