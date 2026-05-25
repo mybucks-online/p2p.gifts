@@ -129,7 +129,7 @@ const WelcomeSocialBar = () => (
       <GithubIcon />
     </SocialButton>
     <SocialButton
-      href="https://docs.mybucks.online"
+      href="https://docs.mybucks.online/p2p.gifts/how-it-works"
       title="Documentation"
       target="_blank"
       rel="noopener noreferrer"
