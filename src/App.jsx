@@ -13,6 +13,10 @@ import media from "@p2p-gifts/styles/media";
 
 import "react-toastify/dist/ReactToastify.css";
 
+const CommitHash = styled.span`
+  display: none;
+`;
+
 const AppWrapper = styled.div`
   position: relative;
   display: flex;
@@ -111,6 +115,10 @@ function App() {
         hideProgressBar={false}
         theme={theme}
       />
+
+      {import.meta.env.VITE_COMMIT_HASH && (
+        <CommitHash data-commit={import.meta.env.VITE_COMMIT_HASH} />
+      )}
     </AppWrapper>
   );
 }
