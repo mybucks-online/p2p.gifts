@@ -5,6 +5,8 @@ import {
   GIFT_CARD_ASPECT_RATIO,
   GIFT_CARD_BOX_SHADOW,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
+import { injectPngMetadata } from "@p2p-gifts/lib/pngMetadata";
+import { SITE_NAME, SITE_URL } from "@p2p-gifts/lib/site";
 
 const EXPORT_PIXEL_RATIO = 2;
 
@@ -45,12 +47,18 @@ export async function renderGiftCardPng(cardElement) {
   const { host, clone, width, height } = mountExportClone(cardElement);
 
   try {
-    return await toPng(clone, {
+    const dataUrl = await toPng(clone, {
       width,
       height,
       pixelRatio: EXPORT_PIXEL_RATIO,
       cacheBust: true,
       skipFonts: true,
+    });
+    return injectPngMetadata(dataUrl, {
+      Author: SITE_NAME,
+      Source: SITE_URL,
+      Software: SITE_NAME,
+      Description: "Crypto gift card created with " + SITE_NAME,
     });
   } finally {
     host.remove();
