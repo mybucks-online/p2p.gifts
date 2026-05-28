@@ -1,10 +1,18 @@
 # p2p.gifts
 
-Browser-only gifting wizard: create a disposable crypto gift wallet, fund it, and download a branded gift card with an embedded QR code.
+Browser-only gifting tool: create a disposable crypto gift wallet, fund it, and download a unique gift card with a QR code that opens the gift wallet so the recipient can claim the funds.
 
-Wallet generation and claiming are powered by [mybucks.online](https://mybucks.online) (seedless, self-custodial).
+## mybucks.online
 
-## Features
+**p2p.gifts** is built on top of [mybucks.online](https://mybucks.online) project — a seedless, disposable, self-custodial , browser-side wallet platform.
+
+Wallet keys are derived entirely in the browser: **Scrypt** (KDF) turns a **passphrase and PIN** into a private key deterministically. There is no seed phrase, no backend, and nothing stored on a server.
+
+A **gifting link** encodes the passphrase and PIN in the URL **hash fragment** (`#wallet=...`). Anyone who opens that link in [app.mybucks.online](https://app.mybucks.online) can access the same wallet and move the funds — full ownership transfer through a shareable URL.
+
+The main idea behind [mybucks.online](https://mybucks.online) and **p2p.gifts** is **“Send the wallet, not just coins.”** For gifting or airdropping, you do not need to ask the recipient to install a wallet app, set up a seed phrase, or share a wallet address. Create a wallet, fund it, and send the wallet itself.
+
+## Properties
 
 - No signup
 - No app install
@@ -13,7 +21,7 @@ Wallet generation and claiming are powered by [mybucks.online](https://mybucks.o
 
 ## Flow
 
-1. **Welcome** — value prop and CTA
+1. **Welcome** — landing screen
 2. **Create wallet** — passphrase + PIN (auto-generated)
 3. **Fund** — send crypto to the gift wallet address
 4. **Gift card** — pick a style, optional note, download PNG or copy the gifting link
@@ -46,7 +54,7 @@ yarn build
 
 ## Links
 
-- [p2p.gifts](https://p2p.gifts) · [mybucks.online](https://mybucks.online) · [Docs](https://docs.mybucks.online) · [GitHub](https://github.com/mybucks-online/p2p.gifts)
+- [p2p.gifts](https://p2p.gifts) · [mybucks.online](https://mybucks.online) · [Docs](https://docs.mybucks.online/p2p.gifts/how-it-works) · [X](https://x.com/mybucks_online)
 
 ## License
 
