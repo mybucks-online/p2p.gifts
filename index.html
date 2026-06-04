@@ -10,10 +10,7 @@
     />
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="robots"
-      content="noindex, nofollow, noarchive, nosnippet, noimageindex"
-    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; script-src-elem 'self'; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
@@ -26,11 +23,11 @@
     <meta property="og:site_name" content="p2p.gifts" />
     <meta
       property="og:title"
-      content="p2p.gifts | Create, Fund, and Share Crypto Gifts"
+      content="p2p.gifts | P2P Crypto Gifts — Gift Cards with QR Code"
     />
     <meta
       property="og:description"
-      content="Browser-only gifting wizard: create a disposable gift wallet, fund it, and download a branded gift card with QR. No signup, no app install."
+      content="p2p.gifts is a browser-only P2P crypto gifting app: create a gift wallet, fund it, and share a branded gift card with QR code. No signup, no app install."
     />
     <meta property="og:image" content="https://p2p.gifts/preview.png" />
     <meta property="og:image:type" content="image/png" />
@@ -42,24 +39,38 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="p2p.gifts | Create, Fund, and Share Crypto Gifts"
+      content="p2p.gifts | P2P Crypto Gifts — Gift Cards with QR Code"
     />
     <meta
       name="twitter:description"
-      content="Browser-only gifting wizard: create a disposable gift wallet, fund it, and download a branded gift card with QR."
+      content="P2P crypto gifts in the browser: create a gift wallet, fund it, and share a gift card with QR code. No signup, no app install."
     />
     <meta name="twitter:image" content="https://p2p.gifts/preview.png" />
 
     <meta
       name="description"
-      content="Browser-only gifting wizard: create a disposable gift wallet, fund it, and download a branded gift card with QR. No signup, no app install. Powered by mybucks.online."
+      content="p2p.gifts — P2P crypto gifts in your browser. Create a disposable gift wallet, fund it, and share a branded gift card with QR code. No signup, no app install. Powered by mybucks.online."
     />
     <meta
       name="keywords"
-      content="p2p.gifts, crypto gift, gift card, micro-gifting, disposable wallet, browser-only, qrcode, seedless wallet, self-custodial"
+      content="p2p gifts, p2p.gifts, p2p crypto gifts, crypto gift card, crypto gifting, gift wallet, micro-gifting, disposable wallet, browser-only, QR code gift, seedless wallet"
     />
 
-    <title>p2p.gifts | Create, Fund, and Share Crypto Gifts</title>
+    <title>p2p.gifts | P2P Crypto Gifts — Gift Cards with QR Code</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "p2p.gifts",
+        "alternateName": "P2P Gifts",
+        "url": "https://p2p.gifts",
+        "description": "Browser-only P2P crypto gifting: create a gift wallet, fund it, and share a branded gift card with QR code.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
