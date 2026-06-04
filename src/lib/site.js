@@ -18,7 +18,7 @@ export const POWERED_BY = Object.freeze({
 export const PROMO_BANNER = Object.freeze({
   enabled: true,
   message:
-    "Gift Card Design Contest is Live! Share your nice gift card to win 5 USDC.",
+    "🎨 Gift Card Design Contest is Live! Share your nice gift card to win 5 USDC.",
   ctaLabel: "Enter now!",
   ctaUrl: "https://t.me/mybucks_online",
 });
