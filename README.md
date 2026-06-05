@@ -52,6 +52,14 @@ yarn dev
 yarn build
 ```
 
+### Umami analytics
+
+Production builds set `VITE_UMAMI_WEBSITE_ID` at build time; Vite substitutes it into `index.html` for the Umami script tag (page views only; no wallet credentials). CSP allows `https://cloud.umami.is` in `index.html`.
+
+**GitHub Actions:** add repository secret `VITE_UMAMI_WEBSITE_ID` (your Umami website UUID).
+
+**Local:** copy `.env.example` to `.env.local` and set `VITE_UMAMI_WEBSITE_ID`, then `yarn build` and inspect `dist/index.html`.
+
 ## Links
 
 - [p2p.gifts](https://p2p.gifts) · [mybucks.online](https://mybucks.online) · [Docs](https://docs.mybucks.online/p2p.gifts/how-it-works) · [X](https://x.com/mybucks_online)
