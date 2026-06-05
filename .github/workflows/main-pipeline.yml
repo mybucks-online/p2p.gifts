@@ -39,6 +39,7 @@ jobs:
       - name: Build the project
         env:
           VITE_COMMIT_HASH: ${{ github.sha }}
+          VITE_UMAMI_WEBSITE_ID: ${{ secrets.VITE_UMAMI_WEBSITE_ID }}
         run: yarn build
       - name: Setup Pages
         uses: actions/configure-pages@v4

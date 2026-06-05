@@ -13,8 +13,13 @@
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; script-src-elem 'self'; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+      content="default-src 'self'; script-src 'self' https://cloud.umami.is; script-src-elem 'self' https://cloud.umami.is; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://cloud.umami.is; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
     />
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="%VITE_UMAMI_WEBSITE_ID%"
+    ></script>
 
     <link rel="canonical" href="https://p2p.gifts" />
 
