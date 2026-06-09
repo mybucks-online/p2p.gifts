@@ -53,19 +53,6 @@ const CardBrand = styled.div`
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 `;
 
-const CardSite = styled.p`
-  flex-shrink: 0;
-  margin: auto 0 0.5rem;
-  font-size: 0.5rem;
-  font-weight: ${({ theme }) => theme.weights.regular};
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
-  opacity: 0.95;
-
-  strong {
-    font-weight: ${({ theme }) => theme.weights.bold};
-  }
-`;
-
 const CardQrInner = styled.div`
   position: relative;
   z-index: 1;
@@ -99,9 +86,6 @@ const CustomCard = forwardRef(function CustomCard(
           <span>p2p.gifts</span>
         </CardBrand>
         <GiftCardNote note={note} shadow />
-        <CardSite>
-          powered by <strong>mybucks.online</strong>
-        </CardSite>
       </CardLeft>
       {giftingLink ? (
         <CardQrInner>

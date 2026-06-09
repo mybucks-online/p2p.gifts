@@ -83,18 +83,6 @@ const GiftCardBrand = styled.div`
   margin-bottom: ${({ theme }) => theme.sizes.x3s};
 `;
 
-const GiftCardSite = styled.p`
-  flex-shrink: 0;
-  margin: auto 0 0.5rem;
-  font-size: 0.5rem;
-  font-weight: ${({ theme }) => theme.weights.regular};
-  opacity: 0.85;
-
-  strong {
-    font-weight: ${({ theme }) => theme.weights.bold};
-  }
-`;
-
 const GiftCardQrInner = styled.div`
   position: relative;
   z-index: 1;
@@ -130,9 +118,6 @@ const DefaultCard = forwardRef(function DefaultCard(
           </GiftCardBrand>
         </GiftCardTop>
         <GiftCardNote note={note} />
-        <GiftCardSite>
-          powered by <strong>mybucks.online</strong>
-        </GiftCardSite>
       </GiftCardLeft>
       {giftingLink ? (
         <GiftCardQrInner>

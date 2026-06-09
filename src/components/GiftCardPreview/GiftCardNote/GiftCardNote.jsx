@@ -45,13 +45,16 @@ const noteTypography = css`
   h4,
   h5,
   h6,
-  p,
-  ul,
-  ol,
   blockquote {
     margin: 0 0 0.35em;
     font-weight: ${({ theme }) => theme.weights.bold};
     line-height: 1.2;
+  }
+
+  p,
+  ul,
+  ol {
+    margin: 0 0 0.35em;
   }
 
   h1 {
@@ -98,7 +101,23 @@ const noteTypography = css`
 
   ul,
   ol {
-    padding-left: 1.15em;
+    list-style-position: inside;
+    padding-left: 0;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    display: list-item;
+    list-style: inherit;
+    font-weight: ${({ theme }) => theme.weights.regular};
+    line-height: 1.45;
   }
 
   blockquote {
