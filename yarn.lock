@@ -1414,10 +1414,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@mybucks.online/core@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@mybucks.online/core/-/core-3.0.1.tgz#59edb12e45f2e75ad2713b32fe1eee7592452f01"
-  integrity sha512-6tEet8bUtJWXtJNo16gI54ajZBK/yc+gypLJQJSyjU8rcNcmbqS9Q6z4qB8doyQguhRykg15hWjzydZJtNhiLA==
+"@mybucks.online/core@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@mybucks.online/core/-/core-3.0.3.tgz#779e0c1fca8a516188808d4ed8d2fa6559ef1461"
+  integrity sha512-V+gxKMrXvAz6dKDNqouRHugR+p435PBjhqmoomstRGu65MWvU/FnHSHsXIY4GRv2+YBp0V1Z7bQUcQ1Pywwieg==
   dependencies:
     buffer "^6.0.3"
     ethers "^6.13.5"

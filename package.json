@@ -41,7 +41,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mybucks.online/core": "^3.0.1",
+    "@mybucks.online/core": "^3.0.3",
     "clipboard-copy": "^4.0.1",
     "ethers": "^6.13.0",
     "focus-trap-react": "^10.2.3",
