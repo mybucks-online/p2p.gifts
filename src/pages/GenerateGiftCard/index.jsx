@@ -444,7 +444,8 @@ const GenerateGiftCard = () => {
                 onChange={(e) => setGiftNote(e.target.value)}
               />
               <GiftNoteHint>
-                Markdown: # headings, **bold**, blank lines for spacing
+                Markdown: # headings, **bold**, - bullets, blank lines for
+                spacing
               </GiftNoteHint>
             </GiftNoteField>
 
