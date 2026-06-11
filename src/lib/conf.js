@@ -48,6 +48,12 @@ export const EVM_NETWORKS = [
     label: "Base",
     scanner: "https://basescan.org",
   },
+  {
+    chainId: 143,
+    name: "monad",
+    label: "Monad",
+    scanner: "https://monadscan.com",
+  },
 ];
 
 export const findNetworkNameByChainId = (chainId) => {
