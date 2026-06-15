@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import copy from "clipboard-copy";
 import styled from "styled-components";
@@ -21,6 +21,12 @@ import {
   WizardStepTitle,
 } from "@p2p-gifts/components/Texts";
 import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
+import {
+  getCardTemplateBackgroundUrl,
+  getCardTemplateById,
+  getCardTemplateQrColor,
+  getCardTemplateTextColor,
+} from "@p2p-gifts/data/cardTemplates";
 import { downloadGiftCardImage } from "@p2p-gifts/lib/giftCardExport";
 import { sizes as breakpoints } from "@p2p-gifts/styles/media";
 
@@ -111,6 +117,23 @@ const PreviewHeading = styled(H3)`
   margin-bottom: 0;
   font-size: ${({ theme }) => theme.fontSize.xl};
   text-align: center;
+`;
+
+const TemplateAttribution = styled.p`
+  margin: 0;
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  text-align: center;
+  line-height: 1.4;
+
+  a {
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const SettingsColumn = styled.section`
@@ -219,22 +242,6 @@ const FileNameHint = styled.span`
   min-width: 0;
 `;
 
-const PresetBackgroundLink = styled.button`
-  flex-shrink: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.weights.regular};
-  color: ${({ theme }) => theme.colors.primary};
-  text-decoration: underline;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.85;
-  }
-`;
-
 const ActionButtons = styled.div`
   display: flex;
   flex-direction: column;
@@ -243,15 +250,13 @@ const ActionButtons = styled.div`
 `;
 
 const MAX_CUSTOM_IMAGE_BYTES = 8 * 1024 * 1024;
-const PRESET_CUSTOM_BACKGROUNDS = {
-  "red-gift-box": "/cards/red-gift-box.jpg",
-};
 
 const GenerateGiftCard = () => {
   const { setActiveStep, giftingLink } = useContext(StoreContext);
   const [cardStyle, setCardStyle] = useState(CARD_STYLE_ID_DEFAULT);
-  const { format: cardFormat, theme } = parseCardStyle(cardStyle);
+  const { format: cardFormat, theme, templateId } = parseCardStyle(cardStyle);
   const formatConfig = getCardFormatConfig(cardFormat);
+  const activeTemplate = templateId ? getCardTemplateById(templateId) : null;
   const [giftNote, setGiftNote] = useState("");
   const [customBackgroundImage, setCustomBackgroundImage] = useState("");
   const [customImageName, setCustomImageName] = useState("");
@@ -260,6 +265,26 @@ const GenerateGiftCard = () => {
   const backgroundFileInputRef = useRef(null);
   const CardComponent = formatConfig.Component;
   const isCustomFormat = formatConfig.supportsCustomImage;
+  const isUploadCustom = isCustomFormat && !templateId;
+
+  useEffect(() => {
+    if (!isCustomFormat) return;
+
+    if (templateId) {
+      const template = getCardTemplateById(templateId);
+      if (!template) return;
+
+      setCustomBackgroundImage(getCardTemplateBackgroundUrl(template));
+      setCustomImageName(template.name);
+      return;
+    }
+
+    setCustomBackgroundImage("");
+    setCustomImageName("");
+    if (backgroundFileInputRef.current) {
+      backgroundFileInputRef.current.value = "";
+    }
+  }, [isCustomFormat, templateId]);
 
   const goBackToFund = () => {
     setActiveStep(WIZARD_STEP.FUND);
@@ -294,18 +319,6 @@ const GenerateGiftCard = () => {
       input.value = "";
     };
     reader.readAsDataURL(file);
-  };
-
-  const handlePresetBackground = (presetId) => {
-    const imageUrl = PRESET_CUSTOM_BACKGROUNDS[presetId];
-    if (!imageUrl) return;
-
-    if (backgroundFileInputRef.current) {
-      backgroundFileInputRef.current.value = "";
-    }
-
-    setCustomBackgroundImage(imageUrl);
-    setCustomImageName(`${presetId}.jpg`);
   };
 
   const handleDownloadImage = async () => {
@@ -361,6 +374,8 @@ const GenerateGiftCard = () => {
                   backgroundImage={customBackgroundImage}
                   note={giftNote}
                   giftingLink={giftingLink}
+                  qrColor={getCardTemplateQrColor(activeTemplate)}
+                  textColor={getCardTemplateTextColor(activeTemplate)}
                 />
               ) : (
                 <CardComponent
@@ -371,6 +386,18 @@ const GenerateGiftCard = () => {
                 />
               )}
             </GiftCardPreview>
+            {activeTemplate ? (
+              <TemplateAttribution>
+                Template by{" "}
+                <a
+                  href={activeTemplate.authorProfileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {activeTemplate.authorHandle}
+                </a>
+              </TemplateAttribution>
+            ) : null}
           </PreviewColumn>
 
           <SettingsColumn>
@@ -404,7 +431,7 @@ const GenerateGiftCard = () => {
               </ThemeSelectWrap>
             </ThemeField>
 
-            {isCustomFormat ? (
+            {isUploadCustom ? (
               <ThemeField>
                 <Label htmlFor="gift-card-background">Background Image</Label>
                 <HiddenFileInput
@@ -423,12 +450,6 @@ const GenerateGiftCard = () => {
                   <FileNameHint>
                     {customImageName || "PNG or JPG, up to 8 MB"}
                   </FileNameHint>
-                  <PresetBackgroundLink
-                    type="button"
-                    onClick={() => handlePresetBackground("red-gift-box")}
-                  >
-                    red-gift-box
-                  </PresetBackgroundLink>
                 </FileHintRow>
               </ThemeField>
             ) : null}

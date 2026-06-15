@@ -3,6 +3,7 @@ import DefaultCard, {
   DEFAULT_CARD_THEME_ID_DEFAULT,
   DEFAULT_CARD_THEME_OPTIONS,
 } from "@p2p-gifts/components/GiftCardPreview/DefaultCard";
+import { CARD_TEMPLATES } from "@p2p-gifts/data/cardTemplates";
 
 export const CARD_FORMATS = {
   default: {
@@ -27,13 +28,22 @@ const CUSTOM_CARD_STYLE_VALUE = "custom";
 
 export const CARD_STYLE_ID_DEFAULT = `${CARD_FORMAT_ID_DEFAULT}:${DEFAULT_CARD_THEME_ID_DEFAULT}`;
 
-/** Single-dropdown options: Classic themes + Custom */
+const BUILTIN_CARD_STYLE_GROUP_LABEL = "Built-in";
+
+/** Single-dropdown options: Classic themes + built-in templates + Custom */
 export const CARD_STYLE_GROUPS = [
   {
     label: CARD_FORMATS.default.label,
     options: DEFAULT_CARD_THEME_OPTIONS.map(({ value, label }) => ({
       value: `${CARD_FORMAT_ID_DEFAULT}:${value}`,
       label,
+    })),
+  },
+  {
+    label: BUILTIN_CARD_STYLE_GROUP_LABEL,
+    options: CARD_TEMPLATES.map((template) => ({
+      value: `${CUSTOM_CARD_STYLE_VALUE}:${template.id}`,
+      label: template.name,
     })),
   },
   {
@@ -48,7 +58,15 @@ export function getCardFormatConfig(formatId) {
 
 export function parseCardStyle(styleId) {
   if (styleId === CUSTOM_CARD_STYLE_VALUE) {
-    return { format: "custom", theme: null };
+    return { format: "custom", theme: null, templateId: null };
+  }
+
+  if (styleId.startsWith(`${CUSTOM_CARD_STYLE_VALUE}:`)) {
+    return {
+      format: "custom",
+      theme: null,
+      templateId: styleId.slice(CUSTOM_CARD_STYLE_VALUE.length + 1),
+    };
   }
 
   const separator = styleId.indexOf(":");
@@ -56,12 +74,13 @@ export function parseCardStyle(styleId) {
     const format = styleId.slice(0, separator);
     const theme = styleId.slice(separator + 1);
     if (CARD_FORMATS[format] && !CARD_FORMATS[format].supportsCustomImage) {
-      return { format, theme };
+      return { format, theme, templateId: null };
     }
   }
 
   return {
     format: CARD_FORMAT_ID_DEFAULT,
     theme: DEFAULT_CARD_THEME_ID_DEFAULT,
+    templateId: null,
   };
 }

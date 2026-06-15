@@ -1,0 +1,20 @@
+[
+  {
+    "id": "red-gift-box",
+    "name": "Red Gift Box",
+    "backgroundImage": "red-gift-box.jpg",
+    "authorHandle": "@john",
+    "authorProfileUrl": "https://x.com/creative_designer",
+    "qrColor": "#a11827",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "light-pinky",
+    "name": "Light Pinky",
+    "backgroundImage": "light-pinky.jpg",
+    "authorHandle": "@jane",
+    "authorProfileUrl": "https://x.com/abcdef",
+    "qrColor": "#8b5cf6",
+    "textColor": "#ffffff"
+  }
+]
