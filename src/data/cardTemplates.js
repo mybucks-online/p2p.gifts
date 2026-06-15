@@ -25,3 +25,9 @@ export function getCardTemplateQrColor(template) {
 export function getCardTemplateTextColor(template) {
   return template?.textColor ?? DEFAULT_CARD_TEMPLATE_TEXT_COLOR;
 }
+
+export function hasTemplateAttribution(template) {
+  return Boolean(
+    template?.authorHandle?.trim() && template?.authorProfileUrl?.trim(),
+  );
+}

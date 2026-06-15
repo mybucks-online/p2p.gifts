@@ -3,7 +3,7 @@
     "id": "red-gift-box",
     "name": "Red Gift Box",
     "backgroundImage": "red-gift-box.jpg",
-    "authorHandle": "@john",
+    "authorHandle": "",
     "authorProfileUrl": "https://x.com/creative_designer",
     "qrColor": "#a11827",
     "textColor": "#ffffff"

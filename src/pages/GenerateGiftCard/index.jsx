@@ -26,6 +26,7 @@ import {
   getCardTemplateById,
   getCardTemplateQrColor,
   getCardTemplateTextColor,
+  hasTemplateAttribution,
 } from "@p2p-gifts/data/cardTemplates";
 import { downloadGiftCardImage } from "@p2p-gifts/lib/giftCardExport";
 import { sizes as breakpoints } from "@p2p-gifts/styles/media";
@@ -386,7 +387,7 @@ const GenerateGiftCard = () => {
                 />
               )}
             </GiftCardPreview>
-            {activeTemplate ? (
+            {activeTemplate && hasTemplateAttribution(activeTemplate) ? (
               <TemplateAttribution>
                 Template by{" "}
                 <a
