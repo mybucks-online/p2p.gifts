@@ -47,7 +47,6 @@ const ScaledSlot = styled.div`
   left: 0;
   transform: ${({ $scale }) => `scale(${$scale})`};
   transform-origin: top left;
-  line-height: 0;
 `;
 
 /** Responsive viewport for gift card templates (fixed 28rem layout, scales on narrow screens). */

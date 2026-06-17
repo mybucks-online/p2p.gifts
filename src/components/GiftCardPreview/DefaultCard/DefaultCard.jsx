@@ -24,6 +24,7 @@ const CardRoot = styled.div`
   color: ${({ theme }) => theme.colors.textInverse};
   background: ${({ $from, $to }) =>
     `linear-gradient(to bottom right, ${$from}, ${$to})`};
+  line-height: normal;
 `;
 
 const GiftCardDecor = styled.div`

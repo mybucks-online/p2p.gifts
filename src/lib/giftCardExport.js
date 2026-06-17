@@ -10,6 +10,24 @@ import { SITE_NAME, SITE_URL } from "@p2p-gifts/lib/site";
 
 const EXPORT_PIXEL_RATIO = 2;
 
+function waitForImages(root) {
+  const images = [...root.querySelectorAll("img")];
+  return Promise.all(
+    images.map(
+      (image) =>
+        new Promise((resolve) => {
+          if (image.complete) {
+            resolve();
+            return;
+          }
+
+          image.addEventListener("load", resolve, { once: true });
+          image.addEventListener("error", resolve, { once: true });
+        }),
+    ),
+  );
+}
+
 function mountExportClone(cardElement) {
   const width = getGiftCardCanonicalWidthPx();
   const height = Math.round(width / GIFT_CARD_ASPECT_RATIO);
@@ -23,6 +41,7 @@ function mountExportClone(cardElement) {
     height: `${height}px`,
     overflow: "hidden",
     pointerEvents: "none",
+    lineHeight: "normal",
   });
 
   const clone = cardElement.cloneNode(true);
@@ -31,6 +50,9 @@ function mountExportClone(cardElement) {
     width: `${width}px`,
     height: `${height}px`,
     margin: "0",
+    boxSizing: "border-box",
+    aspectRatio: "auto",
+    lineHeight: "normal",
     boxShadow: GIFT_CARD_BOX_SHADOW,
   });
 
@@ -47,12 +69,13 @@ export async function renderGiftCardPng(cardElement) {
   const { host, clone, width, height } = mountExportClone(cardElement);
 
   try {
+    await waitForImages(clone);
+
     const dataUrl = await toPng(clone, {
       width,
       height,
       pixelRatio: EXPORT_PIXEL_RATIO,
       cacheBust: true,
-      skipFonts: true,
     });
     return injectPngMetadata(dataUrl, {
       Author: SITE_NAME,

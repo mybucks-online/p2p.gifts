@@ -26,6 +26,7 @@ const CardRoot = styled.div`
   overflow: hidden;
   color: ${({ $textColor }) => $textColor};
   background: #374151;
+  line-height: normal;
 `;
 
 const BackgroundImage = styled.img`
@@ -44,8 +45,13 @@ const CardLeft = styled.div`
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
+  min-height: 0;
   padding-top: 1rem;
   min-width: 0;
+`;
+
+const CardTop = styled.div`
+  flex-shrink: 0;
 `;
 
 const CardBrand = styled.div`
@@ -91,10 +97,12 @@ const CustomCard = forwardRef(function CustomCard(
         <BackgroundImage src={backgroundImage} alt="" aria-hidden />
       ) : null}
       <CardLeft>
-        <CardBrand>
-          <span aria-hidden>🎁</span>
-          <span>p2p.gifts</span>
-        </CardBrand>
+        <CardTop>
+          <CardBrand>
+            <span aria-hidden>🎁</span>
+            <span>p2p.gifts</span>
+          </CardBrand>
+        </CardTop>
         <GiftCardNote note={note} shadow />
       </CardLeft>
       {giftingLink ? (
