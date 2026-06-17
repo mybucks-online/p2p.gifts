@@ -8,6 +8,10 @@ import {
   GIFT_CARD_WIDTH_REM,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
 import GiftCardNote from "@p2p-gifts/components/GiftCardPreview/GiftCardNote";
+import {
+  DEFAULT_CARD_TEMPLATE_QR_COLOR,
+  DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
+} from "@p2p-gifts/data/cardTemplates";
 
 const CardRoot = styled.div`
   width: ${GIFT_CARD_WIDTH_REM}rem;
@@ -20,7 +24,7 @@ const CardRoot = styled.div`
   align-items: stretch;
   gap: ${({ theme }) => theme.sizes.sm};
   overflow: hidden;
-  color: #ffffff;
+  color: ${({ $textColor }) => $textColor};
   background: #374151;
 `;
 
@@ -72,11 +76,17 @@ const CardQrInner = styled.div`
 
 /** Custom background gift card — user image with branding, note, and QR */
 const CustomCard = forwardRef(function CustomCard(
-  { backgroundImage, note = "", giftingLink },
+  {
+    backgroundImage,
+    note = "",
+    giftingLink,
+    qrColor = DEFAULT_CARD_TEMPLATE_QR_COLOR,
+    textColor = DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
+  },
   ref,
 ) {
   return (
-    <CardRoot ref={ref}>
+    <CardRoot ref={ref} $textColor={textColor}>
       {backgroundImage ? (
         <BackgroundImage src={backgroundImage} alt="" aria-hidden />
       ) : null}
@@ -92,7 +102,7 @@ const CustomCard = forwardRef(function CustomCard(
           <QRCodeSVG
             value={giftingLink}
             size={GIFT_CARD_QR_SIZE}
-            fgColor="#111827"
+            fgColor={qrColor}
             bgColor="#ffffff"
           />
         </CardQrInner>
