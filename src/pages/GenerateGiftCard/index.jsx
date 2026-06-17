@@ -467,7 +467,7 @@ const GenerateGiftCard = () => {
               />
               <GiftNoteHint>
                 Markdown: # headings, **bold**, - bullets, blank lines for
-                spacing
+                spacing. Extra spaces are kept for padding and word gaps.
               </GiftNoteHint>
             </GiftNoteField>
 
