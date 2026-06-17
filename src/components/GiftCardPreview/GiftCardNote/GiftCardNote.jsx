@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import styled, { css } from "styled-components";
 
+import { giftCardTextStyles } from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
 import { prepareGiftNoteMarkdown } from "@p2p-gifts/lib/giftNoteMarkdown";
 
 const NOTE_ALLOWED_ELEMENTS = [
@@ -29,6 +30,7 @@ const markdownComponents = {
 };
 
 const noteTypography = css`
+  ${giftCardTextStyles}
   width: 100%;
   margin: ${({ theme }) => theme.sizes.sm} 0 0;
   padding: 0;

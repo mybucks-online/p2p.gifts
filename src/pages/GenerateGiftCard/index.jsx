@@ -295,6 +295,12 @@ const GenerateGiftCard = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    if (file.type === "image/svg+xml") {
+      toast("SVG is not supported. Please use PNG, JPG, or WebP.");
+      event.target.value = "";
+      return;
+    }
+
     if (!file.type.startsWith("image/")) {
       toast("Please choose an image file.");
       event.target.value = "";
@@ -467,7 +473,7 @@ const GenerateGiftCard = () => {
               />
               <GiftNoteHint>
                 Markdown: # headings, **bold**, - bullets, blank lines for
-                spacing
+                spacing. Extra spaces are kept for padding and word gaps.
               </GiftNoteHint>
             </GiftNoteField>
 

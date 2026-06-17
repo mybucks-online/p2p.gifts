@@ -9,6 +9,7 @@ import {
 } from "@p2p-gifts/components/GiftCardPreview/constants";
 import { resolveDefaultCardTheme } from "@p2p-gifts/components/GiftCardPreview/DefaultCard/themes";
 import GiftCardNote from "@p2p-gifts/components/GiftCardPreview/GiftCardNote";
+import { giftCardTextStyles } from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
 
 const CardRoot = styled.div`
   width: ${GIFT_CARD_WIDTH_REM}rem;
@@ -24,6 +25,8 @@ const CardRoot = styled.div`
   color: ${({ theme }) => theme.colors.textInverse};
   background: ${({ $from, $to }) =>
     `linear-gradient(to bottom right, ${$from}, ${$to})`};
+  line-height: normal;
+  ${giftCardTextStyles}
 `;
 
 const GiftCardDecor = styled.div`
