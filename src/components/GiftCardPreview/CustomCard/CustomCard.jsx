@@ -8,6 +8,7 @@ import {
   GIFT_CARD_WIDTH_REM,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
 import GiftCardNote from "@p2p-gifts/components/GiftCardPreview/GiftCardNote";
+import { giftCardTextStyles } from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
 import {
   DEFAULT_CARD_TEMPLATE_QR_COLOR,
   DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
@@ -27,6 +28,7 @@ const CardRoot = styled.div`
   color: ${({ $textColor }) => $textColor};
   background: #374151;
   line-height: normal;
+  ${giftCardTextStyles}
 `;
 
 const BackgroundImage = styled.img`

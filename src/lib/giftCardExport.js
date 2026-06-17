@@ -1,4 +1,4 @@
-import { toPng } from "html-to-image";
+import { getFontEmbedCSS, toPng } from "html-to-image";
 
 import {
   getGiftCardCanonicalWidthPx,
@@ -9,6 +9,8 @@ import { injectPngMetadata } from "@p2p-gifts/lib/pngMetadata";
 import { SITE_NAME, SITE_URL } from "@p2p-gifts/lib/site";
 
 const EXPORT_PIXEL_RATIO = 2;
+const INTER_FONT_FAMILY = "Inter";
+const FONT_EMBED_OPTIONS = { preferredFontFormat: "woff2" };
 
 function waitForImages(root) {
   const images = [...root.querySelectorAll("img")];
@@ -28,37 +30,24 @@ function waitForImages(root) {
   );
 }
 
-function mountExportClone(cardElement) {
-  const width = getGiftCardCanonicalWidthPx();
-  const height = Math.round(width / GIFT_CARD_ASPECT_RATIO);
-  const host = document.createElement("div");
-  host.setAttribute("aria-hidden", "true");
-  Object.assign(host.style, {
-    position: "fixed",
-    left: "-10000px",
-    top: "0",
-    width: `${width}px`,
-    height: `${height}px`,
-    overflow: "hidden",
-    pointerEvents: "none",
-    lineHeight: "normal",
-  });
+async function waitForFonts(cardElement) {
+  if (!document.fonts) return;
 
-  const clone = cardElement.cloneNode(true);
-  Object.assign(clone.style, {
-    transform: "none",
-    width: `${width}px`,
-    height: `${height}px`,
-    margin: "0",
-    boxSizing: "border-box",
-    aspectRatio: "auto",
-    lineHeight: "normal",
-    boxShadow: GIFT_CARD_BOX_SHADOW,
-  });
+  const rootFontSize = parseFloat(
+    getComputedStyle(document.documentElement).fontSize,
+  );
+  const cardStyle = getComputedStyle(cardElement);
+  const fontFamily = cardStyle.fontFamily || INTER_FONT_FAMILY;
+  const fontSize = cardStyle.fontSize || `${rootFontSize}px`;
 
-  host.appendChild(clone);
-  document.body.appendChild(host);
-  return { host, clone, width, height };
+  await document.fonts.ready;
+  await Promise.allSettled([
+    document.fonts.load(`400 ${fontSize} ${fontFamily}`),
+    document.fonts.load(`500 ${fontSize} ${fontFamily}`),
+    document.fonts.load(`700 ${fontSize} ${fontFamily}`),
+    document.fonts.load(`500 0.875rem ${INTER_FONT_FAMILY}`),
+    document.fonts.load(`700 1.125rem ${INTER_FONT_FAMILY}`),
+  ]);
 }
 
 export async function renderGiftCardPng(cardElement) {
@@ -66,26 +55,37 @@ export async function renderGiftCardPng(cardElement) {
     throw new Error("Gift card element is missing");
   }
 
-  const { host, clone, width, height } = mountExportClone(cardElement);
+  const width = getGiftCardCanonicalWidthPx();
+  const height = Math.round(width / GIFT_CARD_ASPECT_RATIO);
 
-  try {
-    await waitForImages(clone);
+  await waitForFonts(cardElement);
+  await waitForImages(cardElement);
 
-    const dataUrl = await toPng(clone, {
-      width,
-      height,
-      pixelRatio: EXPORT_PIXEL_RATIO,
-      cacheBust: true,
-    });
-    return injectPngMetadata(dataUrl, {
-      Author: SITE_NAME,
-      Source: SITE_URL,
-      Software: SITE_NAME,
-      Description: "Crypto gift card created with " + SITE_NAME,
-    });
-  } finally {
-    host.remove();
-  }
+  const fontEmbedCSS = await getFontEmbedCSS(cardElement, FONT_EMBED_OPTIONS);
+
+  const dataUrl = await toPng(cardElement, {
+    width,
+    height,
+    pixelRatio: EXPORT_PIXEL_RATIO,
+    cacheBust: true,
+    ...FONT_EMBED_OPTIONS,
+    fontEmbedCSS,
+    style: {
+      transform: "none",
+      margin: "0",
+      boxSizing: "border-box",
+      aspectRatio: "auto",
+      lineHeight: "normal",
+      boxShadow: GIFT_CARD_BOX_SHADOW,
+    },
+  });
+
+  return injectPngMetadata(dataUrl, {
+    Author: SITE_NAME,
+    Source: SITE_URL,
+    Software: SITE_NAME,
+    Description: "Crypto gift card created with " + SITE_NAME,
+  });
 }
 
 export function downloadDataUrl(dataUrl, filename) {
