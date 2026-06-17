@@ -5,8 +5,17 @@ export const CARD_TEMPLATES = cardTemplates;
 export const DEFAULT_CARD_TEMPLATE_QR_COLOR = "#111827";
 export const DEFAULT_CARD_TEMPLATE_TEXT_COLOR = "#ffffff";
 
+export function isCardTemplateActive(template) {
+  return template?.active !== false;
+}
+
+export const ACTIVE_CARD_TEMPLATES =
+  CARD_TEMPLATES.filter(isCardTemplateActive);
+
 export function getCardTemplateById(templateId) {
-  return CARD_TEMPLATES.find((template) => template.id === templateId) ?? null;
+  return (
+    ACTIVE_CARD_TEMPLATES.find((template) => template.id === templateId) ?? null
+  );
 }
 
 export function getCardTemplateBackgroundUrl(template) {

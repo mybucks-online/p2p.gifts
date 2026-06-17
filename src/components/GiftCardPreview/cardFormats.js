@@ -3,7 +3,7 @@ import DefaultCard, {
   DEFAULT_CARD_THEME_ID_DEFAULT,
   DEFAULT_CARD_THEME_OPTIONS,
 } from "@p2p-gifts/components/GiftCardPreview/DefaultCard";
-import { CARD_TEMPLATES } from "@p2p-gifts/data/cardTemplates";
+import { ACTIVE_CARD_TEMPLATES } from "@p2p-gifts/data/cardTemplates";
 
 export const CARD_FORMATS = {
   default: {
@@ -30,20 +30,24 @@ export const CARD_STYLE_ID_DEFAULT = `${CARD_FORMAT_ID_DEFAULT}:${DEFAULT_CARD_T
 
 const BUILTIN_CARD_STYLE_GROUP_LABEL = "Built-in";
 
-/** Single-dropdown options: Classic themes + built-in templates + Custom */
+/** Single-dropdown options: built-in templates + Classic themes + Custom */
 export const CARD_STYLE_GROUPS = [
+  ...(ACTIVE_CARD_TEMPLATES.length > 0
+    ? [
+        {
+          label: BUILTIN_CARD_STYLE_GROUP_LABEL,
+          options: ACTIVE_CARD_TEMPLATES.map((template) => ({
+            value: `${CUSTOM_CARD_STYLE_VALUE}:${template.id}`,
+            label: template.name,
+          })),
+        },
+      ]
+    : []),
   {
     label: CARD_FORMATS.default.label,
     options: DEFAULT_CARD_THEME_OPTIONS.map(({ value, label }) => ({
       value: `${CARD_FORMAT_ID_DEFAULT}:${value}`,
       label,
-    })),
-  },
-  {
-    label: BUILTIN_CARD_STYLE_GROUP_LABEL,
-    options: CARD_TEMPLATES.map((template) => ({
-      value: `${CUSTOM_CARD_STYLE_VALUE}:${template.id}`,
-      label: template.name,
     })),
   },
   {

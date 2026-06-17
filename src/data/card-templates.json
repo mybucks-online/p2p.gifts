@@ -2,19 +2,22 @@
   {
     "id": "red-gift-box",
     "name": "Red Gift Box",
-    "backgroundImage": "red-gift-box.jpg",
+    "active": false,
+    "backgroundImage": "gift-card-revision.png",
     "authorHandle": "",
     "authorProfileUrl": "https://x.com/creative_designer",
-    "qrColor": "#a11827",
+    "qrColor": "#a20f74",
     "textColor": "#ffffff"
   },
   {
-    "id": "light-pinky",
-    "name": "Light Pinky",
-    "backgroundImage": "light-pinky.jpg",
-    "authorHandle": "@jane",
-    "authorProfileUrl": "https://x.com/abcdef",
-    "qrColor": "#8b5cf6",
-    "textColor": "#ffffff"
+    "id": "din-studio-gift-card",
+    "name": "Din Studio Gift Card",
+    "active": true,
+    "backgroundImage": "din-studio-gift-card.png",
+    "authorHandle": "@din_studio_",
+    "authorProfileUrl": "https://instagram.com/din_studio_",
+    "qrColor": "#4e0f9e",
+    "textColor": "#ffffff",
+    "inserted": "June 17, 2026"
   }
 ]
