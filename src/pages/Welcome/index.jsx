@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "@p2p-gifts/components/Button";
 import WelcomeSocialBar from "@p2p-gifts/components/WelcomeSocialBar";
 import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
-import { POWERED_BY } from "@p2p-gifts/lib/site";
+import { LEGAL_LINKS, POWERED_BY } from "@p2p-gifts/lib/site";
 import media from "@p2p-gifts/styles/media";
 
 const WelcomeScreen = styled.main`
@@ -169,6 +169,30 @@ const PoweredBy = styled.p`
   }
 `;
 
+const LegalNav = styled.nav`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.sizes.x3s};
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  color: ${({ theme }) => theme.colors.textMuted};
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.primary};
+    }
+  }
+
+  span[aria-hidden] {
+    user-select: none;
+  }
+`;
+
 const Welcome = () => {
   const { setActiveStep } = useContext(StoreContext);
 
@@ -207,6 +231,16 @@ const Welcome = () => {
               {POWERED_BY.label}
             </a>
           </PoweredBy>
+          <LegalNav aria-label="Legal">
+            {LEGAL_LINKS.map((link, index) => (
+              <span key={link.href}>
+                {index > 0 && <span aria-hidden> · </span>}
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                </a>
+              </span>
+            ))}
+          </LegalNav>
           <WelcomeSocialBar />
         </CtaSection>
       </WelcomeInner>
