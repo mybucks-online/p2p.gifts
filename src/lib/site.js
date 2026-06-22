@@ -14,6 +14,24 @@ export const POWERED_BY = Object.freeze({
   url: "https://mybucks.online?utm_source=p2p.gifts",
 });
 
+/** p2p.gifts legal pages on GitBook */
+export const DOCS_ORIGIN = "https://docs.mybucks.online";
+
+export const LEGAL_LINKS = Object.freeze([
+  {
+    label: "Terms of Use",
+    href: `${DOCS_ORIGIN}/p2p.gifts/terms-of-use`,
+  },
+  {
+    label: "Privacy Policy",
+    href: `${DOCS_ORIGIN}/p2p.gifts/privacy-policy`,
+  },
+  {
+    label: "Disclaimers",
+    href: `${DOCS_ORIGIN}/p2p.gifts/disclaimers`,
+  },
+]);
+
 /** Top-of-page promo banner (set enabled: false to hide) */
 export const PROMO_BANNER = Object.freeze({
   enabled: true,
