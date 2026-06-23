@@ -148,6 +148,30 @@ const CtaSection = styled.div`
   padding-top: ${({ theme }) => theme.sizes.x2l};
 `;
 
+const StepsFlow = styled.p`
+  margin: 0;
+  max-width: 36rem;
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  line-height: 1.5;
+  color: ${({ theme }) => theme.colors.textMuted};
+
+  ${media.sm`
+    font-size: ${({ theme }) => theme.fontSize.base};
+  `}
+
+  @media (min-width: 992px) {
+    font-size: ${({ theme }) => theme.fontSize.lg};
+  }
+`;
+
+const CtaBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.sizes.lg};
+  width: 100%;
+`;
+
 const PoweredBy = styled.p`
   margin: 0;
   font-size: ${({ theme }) => theme.fontSize.sm};
@@ -222,9 +246,15 @@ const Welcome = () => {
         </ValueText>
 
         <CtaSection>
-          <Button type="button" onClick={goToCreateWallet}>
-            🎁 Start Gifting
-          </Button>
+          <CtaBlock>
+            <StepsFlow>
+              1️⃣ Auto-generate a one-time wallet ➔ 2️⃣ Deposit crypto ➔ 3️⃣ Send
+              the card/link
+            </StepsFlow>
+            <Button type="button" onClick={goToCreateWallet}>
+              🎁 Start Gifting
+            </Button>
+          </CtaBlock>
           <PoweredBy>
             Powered by{" "}
             <a href={POWERED_BY.url} target="_blank" rel="noopener noreferrer">
