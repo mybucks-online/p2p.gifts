@@ -245,9 +245,15 @@ const FileNameHint = styled.span`
 
 const ActionButtons = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: ${({ theme }) => theme.sizes.base};
   width: 100%;
+
+  & > button {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
 `;
 
 const MAX_CUSTOM_IMAGE_BYTES = 8 * 1024 * 1024;
@@ -491,7 +497,6 @@ const GenerateGiftCard = () => {
               <Button
                 type="button"
                 $size="block"
-                $variant="secondary"
                 disabled={!giftingLink}
                 onClick={handleCopyGiftingLink}
               >
