@@ -7,6 +7,7 @@ import {
   GIFT_CARD_QR_SIZE,
   GIFT_CARD_WIDTH_REM,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
+import GiftCardBrand from "@p2p-gifts/components/GiftCardPreview/GiftCardBrand";
 import GiftCardNote from "@p2p-gifts/components/GiftCardPreview/GiftCardNote";
 import { giftCardTextStyles } from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
 import {
@@ -56,15 +57,6 @@ const CardTop = styled.div`
   flex-shrink: 0;
 `;
 
-const CardBrand = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.sizes.sm};
-  font-weight: ${({ theme }) => theme.weights.bold};
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
-`;
-
 const CardQrInner = styled.div`
   position: relative;
   z-index: 1;
@@ -100,10 +92,7 @@ const CustomCard = forwardRef(function CustomCard(
       ) : null}
       <CardLeft>
         <CardTop>
-          <CardBrand>
-            <span aria-hidden>🎁</span>
-            <span>p2p.gifts</span>
-          </CardBrand>
+          <GiftCardBrand textShadow="0 1px 4px rgba(0, 0, 0, 0.55)" />
         </CardTop>
         <GiftCardNote note={note} shadow />
       </CardLeft>
