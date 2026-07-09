@@ -143,8 +143,8 @@ export async function renderGiftCardPng(cardElement) {
 
 export const GIFT_QR_EXPORT_SIZE = 512;
 export const GIFT_QR_LOGO_SRC = "/favicon-32x32.png";
-/** Logo footprint as a fraction of QR size — keep ~15–20% for reliable scanning */
-const GIFT_QR_LOGO_SIZE_RATIO = 0.19;
+/** Logo footprint as a fraction of QR size — keep ~12–15% for reliable scanning */
+const GIFT_QR_LOGO_SIZE_RATIO = 0.12;
 
 export function getGiftQrImageSettings(qrSize = GIFT_QR_EXPORT_SIZE) {
   const logoSize = Math.round(qrSize * GIFT_QR_LOGO_SIZE_RATIO);
