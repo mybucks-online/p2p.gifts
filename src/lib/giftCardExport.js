@@ -88,6 +88,36 @@ export async function renderGiftCardPng(cardElement) {
   });
 }
 
+export const GIFT_QR_EXPORT_SIZE = 512;
+export const GIFT_QR_LOGO_SRC = "/favicon-32x32.png";
+/** Logo footprint as a fraction of QR size — keep ~15–20% for reliable scanning */
+const GIFT_QR_LOGO_SIZE_RATIO = 0.19;
+
+export function getGiftQrImageSettings(qrSize = GIFT_QR_EXPORT_SIZE) {
+  const logoSize = Math.round(qrSize * GIFT_QR_LOGO_SIZE_RATIO);
+  return {
+    src: GIFT_QR_LOGO_SRC,
+    width: logoSize,
+    height: logoSize,
+    excavate: true,
+  };
+}
+
+export function preloadGiftQrLogo() {
+  return new Promise((resolve) => {
+    const image = new Image();
+    image.onload = resolve;
+    image.onerror = resolve;
+    image.src = GIFT_QR_LOGO_SRC;
+  });
+}
+
+export function waitForQrCanvasPaint() {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  });
+}
+
 export function downloadDataUrl(dataUrl, filename) {
   const link = document.createElement("a");
   link.download = filename;
@@ -101,4 +131,19 @@ export async function downloadGiftCardImage(
 ) {
   const dataUrl = await renderGiftCardPng(cardElement);
   downloadDataUrl(dataUrl, filename);
+}
+
+export function downloadQrCodeImage(canvas, filename = "gift-qr.png") {
+  if (!canvas) {
+    throw new Error("QR canvas is missing");
+  }
+
+  const dataUrl = canvas.toDataURL("image/png");
+  const withMeta = injectPngMetadata(dataUrl, {
+    Author: SITE_NAME,
+    Source: SITE_URL,
+    Software: SITE_NAME,
+    Description: "Gift wallet QR code from " + SITE_NAME,
+  });
+  downloadDataUrl(withMeta, filename);
 }

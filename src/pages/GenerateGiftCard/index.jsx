@@ -1,6 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import copy from "clipboard-copy";
+import { QRCodeCanvas } from "qrcode.react";
 import styled from "styled-components";
 
 import { BackIcon } from "@p2p-gifts/assets/icons";
@@ -12,6 +13,7 @@ import GiftCardPreview, {
   getCardFormatConfig,
   parseCardStyle,
 } from "@p2p-gifts/components/GiftCardPreview";
+import { resolveDefaultCardTheme } from "@p2p-gifts/components/GiftCardPreview/DefaultCard/themes";
 import Input from "@p2p-gifts/components/Input";
 import { Label } from "@p2p-gifts/components/Label";
 import Select from "@p2p-gifts/components/Select";
@@ -28,7 +30,14 @@ import {
   getCardTemplateTextColor,
   hasTemplateAttribution,
 } from "@p2p-gifts/data/cardTemplates";
-import { downloadGiftCardImage } from "@p2p-gifts/lib/giftCardExport";
+import {
+  downloadGiftCardImage,
+  downloadQrCodeImage,
+  getGiftQrImageSettings,
+  GIFT_QR_EXPORT_SIZE,
+  preloadGiftQrLogo,
+  waitForQrCanvasPaint,
+} from "@p2p-gifts/lib/giftCardExport";
 import { sizes as breakpoints } from "@p2p-gifts/styles/media";
 
 const DESKTOP_MIN = breakpoints.lg + 1;
@@ -246,14 +255,36 @@ const FileNameHint = styled.span`
 const ActionButtons = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: ${({ theme }) => theme.sizes.base};
   width: 100%;
 
   & > button {
-    flex: 1;
+    flex: 1 1 calc(33.333% - ${({ theme }) => theme.sizes.base});
     min-width: 0;
     width: auto;
+    padding-inline: ${({ theme }) => theme.sizes.sm};
+    font-size: ${({ theme }) => theme.fontSize.sm};
   }
+
+  @media (max-width: ${DESKTOP_MIN - 1}px) {
+    flex-direction: column;
+
+    & > button {
+      flex: 1 1 auto;
+      width: 100%;
+      padding-inline: ${({ theme }) => theme.sizes.xl};
+      font-size: ${({ theme }) => theme.fontSize.base};
+    }
+  }
+`;
+
+const QrExportHost = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
 `;
 
 const MAX_CUSTOM_IMAGE_BYTES = 8 * 1024 * 1024;
@@ -268,11 +299,19 @@ const GenerateGiftCard = () => {
   const [customBackgroundImage, setCustomBackgroundImage] = useState("");
   const [customImageName, setCustomImageName] = useState("");
   const [downloading, setDownloading] = useState(false);
+  const [downloadingQr, setDownloadingQr] = useState(false);
   const cardExportRef = useRef(null);
+  const qrExportRef = useRef(null);
   const backgroundFileInputRef = useRef(null);
   const CardComponent = formatConfig.Component;
   const isCustomFormat = formatConfig.supportsCustomImage;
   const isUploadCustom = isCustomFormat && !templateId;
+  const qrFgColor = useMemo(() => {
+    if (isCustomFormat) {
+      return getCardTemplateQrColor(activeTemplate);
+    }
+    return resolveDefaultCardTheme(theme).to;
+  }, [isCustomFormat, activeTemplate, theme]);
 
   useEffect(() => {
     if (!isCustomFormat) return;
@@ -292,6 +331,12 @@ const GenerateGiftCard = () => {
       backgroundFileInputRef.current.value = "";
     }
   }, [isCustomFormat, templateId]);
+
+  useEffect(() => {
+    if (giftingLink) {
+      preloadGiftQrLogo();
+    }
+  }, [giftingLink]);
 
   const goBackToFund = () => {
     setActiveStep(WIZARD_STEP.FUND);
@@ -366,6 +411,28 @@ const GenerateGiftCard = () => {
       toast("Gifting link copied to clipboard.");
     } catch {
       toast("Could not copy link. Please try again.");
+    }
+  };
+
+  const handleDownloadQrCode = async () => {
+    if (!giftingLink || downloadingQr) return;
+
+    const canvas = qrExportRef.current;
+    if (!canvas) {
+      toast("QR code is not available yet.");
+      return;
+    }
+
+    setDownloadingQr(true);
+    try {
+      await preloadGiftQrLogo();
+      await waitForQrCanvasPaint();
+      downloadQrCodeImage(canvas, "gift-qr.png");
+      toast("QR code saved.");
+    } catch {
+      toast("Could not save QR code. Please try again.");
+    } finally {
+      setDownloadingQr(false);
     }
   };
 
@@ -497,6 +564,14 @@ const GenerateGiftCard = () => {
               <Button
                 type="button"
                 $size="block"
+                disabled={!giftingLink || downloadingQr}
+                onClick={handleDownloadQrCode}
+              >
+                {downloadingQr ? "Saving…" : "Download QR Code"}
+              </Button>
+              <Button
+                type="button"
+                $size="block"
                 disabled={!giftingLink}
                 onClick={handleCopyGiftingLink}
               >
@@ -506,6 +581,20 @@ const GenerateGiftCard = () => {
           </SettingsColumn>
         </ContentGrid>
       </GiftCardContainer>
+      <QrExportHost aria-hidden="true">
+        {giftingLink ? (
+          <QRCodeCanvas
+            ref={qrExportRef}
+            value={giftingLink}
+            size={GIFT_QR_EXPORT_SIZE}
+            level="H"
+            marginSize={4}
+            fgColor={qrFgColor}
+            bgColor="#ffffff"
+            imageSettings={getGiftQrImageSettings(GIFT_QR_EXPORT_SIZE)}
+          />
+        ) : null}
+      </QrExportHost>
     </PageLayout>
   );
 };
