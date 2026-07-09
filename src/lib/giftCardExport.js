@@ -1,4 +1,4 @@
-import { getFontEmbedCSS, toPng } from "html-to-image";
+import { toPng } from "html-to-image";
 
 import {
   getGiftCardCanonicalWidthPx,
@@ -10,7 +10,54 @@ import { SITE_NAME, SITE_URL } from "@p2p-gifts/lib/site";
 
 const EXPORT_PIXEL_RATIO = 2;
 const INTER_FONT_FAMILY = "Inter";
-const FONT_EMBED_OPTIONS = { preferredFontFormat: "woff2" };
+const INTER_STYLESHEET_URL =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
+
+let interFontEmbedCssCache = null;
+
+async function readBlobAsDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+/** Fetch Inter CSS + font files directly — avoids cross-origin cssRules SecurityError. */
+async function getGiftCardFontEmbedCSS() {
+  if (interFontEmbedCssCache) {
+    return interFontEmbedCssCache;
+  }
+
+  const response = await fetch(INTER_STYLESHEET_URL);
+  if (!response.ok) {
+    throw new Error("Could not fetch Inter stylesheet");
+  }
+
+  let cssText = await response.text();
+  const urlPattern = /url\(([^)]+)\)/g;
+  const rawUrls = [...cssText.matchAll(urlPattern)].map((match) =>
+    match[1].replace(/["']/g, ""),
+  );
+
+  await Promise.all(
+    [...new Set(rawUrls)].map(async (rawUrl) => {
+      const fontUrl = rawUrl.startsWith("http")
+        ? rawUrl
+        : new URL(rawUrl, INTER_STYLESHEET_URL).href;
+      const fontResponse = await fetch(fontUrl);
+      if (!fontResponse.ok) {
+        throw new Error(`Could not fetch font: ${fontUrl}`);
+      }
+      const dataUrl = await readBlobAsDataUrl(await fontResponse.blob());
+      cssText = cssText.split(rawUrl).join(dataUrl);
+    }),
+  );
+
+  interFontEmbedCssCache = cssText;
+  return cssText;
+}
 
 function waitForImages(root) {
   const images = [...root.querySelectorAll("img")];
@@ -61,15 +108,21 @@ export async function renderGiftCardPng(cardElement) {
   await waitForFonts(cardElement);
   await waitForImages(cardElement);
 
-  const fontEmbedCSS = await getFontEmbedCSS(cardElement, FONT_EMBED_OPTIONS);
+  let fontEmbedCSS = "";
+  try {
+    fontEmbedCSS = await getGiftCardFontEmbedCSS();
+  } catch {
+    fontEmbedCSS = "";
+  }
 
   const dataUrl = await toPng(cardElement, {
     width,
     height,
     pixelRatio: EXPORT_PIXEL_RATIO,
     cacheBust: true,
-    ...FONT_EMBED_OPTIONS,
-    fontEmbedCSS,
+    preferredFontFormat: "woff2",
+    fontEmbedCSS: fontEmbedCSS || undefined,
+    skipFonts: !fontEmbedCSS,
     style: {
       transform: "none",
       margin: "0",
