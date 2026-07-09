@@ -1,6 +1,7 @@
 /** p2p.gifts site branding (this app) */
 export const SITE_NAME = "p2p.gifts";
 export const SITE_URL = "https://p2p.gifts";
+export const SITE_LOGO_MARK = "/logo-48x48.png";
 export const SITE_TAGLINE = "Create. Fund. Share.";
 export const SITE_DESCRIPTION =
   "Browser-only P2P crypto gifting wizard: create a seedless, disposable gift wallet, fund it, and share a branded gift card with QR. No signup, no app install.";
