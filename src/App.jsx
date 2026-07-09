@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { AppShell } from "@p2p-gifts/components/Containers";
-import NotificationBanner from "@p2p-gifts/components/NotificationBanner";
 import ThemeToggleButton from "@p2p-gifts/components/ThemeToggleButton";
 import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
 import CreateWallet from "@p2p-gifts/pages/CreateWallet";
@@ -98,7 +97,6 @@ function App() {
     <AppWrapper>
       {activeStep !== WIZARD_STEP.WELCOME ? <ThemeToggleButton fixed /> : null}
       <AppShell>
-        <NotificationBanner />
         {activeStep === WIZARD_STEP.WELCOME ? (
           <WelcomeScroll>
             <Welcome />
