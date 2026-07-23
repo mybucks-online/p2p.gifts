@@ -225,7 +225,7 @@ const Welcome = () => {
         </LogoSection>
 
         <ValueText>
-          Gift crypto to your friend or teammate — no signup, no app install,
+          Gift crypto to your community — no signup, no app install,
           instant claim.
         </ValueText>
 
