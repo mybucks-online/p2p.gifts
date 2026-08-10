@@ -77,33 +77,8 @@ const GithubIcon = () => (
   </svg>
 );
 
-const DocsIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden
-  >
-    <path
-      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M14 2v6h6M16 13H8M16 17H8M10 9H8"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 const WelcomeSocialBar = () => (
-  <Bar aria-label="Social links, docs, and theme">
+  <Bar aria-label="Social links and theme">
     <SocialButton
       href="https://x.com/mybucks_online"
       title="X (Twitter)"
@@ -127,14 +102,6 @@ const WelcomeSocialBar = () => (
       rel="noopener noreferrer"
     >
       <GithubIcon />
-    </SocialButton>
-    <SocialButton
-      href="https://docs.mybucks.online/p2p.gifts/how-it-works"
-      title="Documentation"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <DocsIcon />
     </SocialButton>
     <ThemeToggleButton />
   </Bar>

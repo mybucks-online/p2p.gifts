@@ -188,7 +188,8 @@ const LegalNav = styled.nav`
 
   a {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
     transition: color 0.2s ease;
 
     &:hover {
@@ -200,7 +201,6 @@ const LegalNav = styled.nav`
     user-select: none;
   }
 `;
-
 const Welcome = () => {
   const { setActiveStep } = useContext(StoreContext);
 
@@ -220,12 +220,12 @@ const Welcome = () => {
           </HeroWrap>
           <TitleBlock>
             <Title>p2p.gifts</Title>
-            <Tagline>Create. Fund. Share.</Tagline>
+            <Tagline>Peer-to-peer crypto gifting wizard</Tagline>
           </TitleBlock>
         </LogoSection>
 
         <ValueText>
-          Gift crypto to your community — no signup, no app install,
+          Gift crypto to your community or friends — no signup, no app install,
           instant claim.
         </ValueText>
 
@@ -241,10 +241,10 @@ const Welcome = () => {
               {POWERED_BY.label}
             </a>
           </PoweredBy>
-          <LegalNav aria-label="Legal">
+          <LegalNav aria-label="Documentation and legal">
             {LEGAL_LINKS.map((link, index) => (
               <span key={link.href}>
-                {index > 0 && <span aria-hidden> · </span>}
+                {index > 0 && <span aria-hidden> | </span>}
                 <a href={link.href} target="_blank" rel="noopener noreferrer">
                   {link.label}
                 </a>

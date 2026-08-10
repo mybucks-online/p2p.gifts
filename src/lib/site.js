@@ -2,7 +2,6 @@
 export const SITE_NAME = "p2p.gifts";
 export const SITE_URL = "https://p2p.gifts";
 export const SITE_LOGO_MARK = "/logo-48x48.png";
-export const SITE_TAGLINE = "Create. Fund. Share.";
 export const SITE_DESCRIPTION =
   "Browser-only P2P crypto gifting wizard: create a seedless, disposable gift wallet, fund it, and share a branded gift card with QR. No signup, no app install.";
 
@@ -19,6 +18,10 @@ export const POWERED_BY = Object.freeze({
 export const DOCS_ORIGIN = "https://docs.mybucks.online";
 
 export const LEGAL_LINKS = Object.freeze([
+  {
+    label: "How it works",
+    href: `${DOCS_ORIGIN}/p2p.gifts/how-it-works`,
+  },
   {
     label: "Terms of Use",
     href: `${DOCS_ORIGIN}/p2p.gifts/terms-of-use`,
