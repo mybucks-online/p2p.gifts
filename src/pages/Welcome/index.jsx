@@ -46,6 +46,7 @@ const HeroFrame = styled.div`
   position: relative;
   width: 18rem;
   max-width: 100%;
+  border-radius: ${({ theme }) => theme.radius.form};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.colors.cardShadow};
   border: ${({ theme }) =>
