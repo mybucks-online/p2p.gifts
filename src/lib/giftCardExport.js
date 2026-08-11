@@ -108,12 +108,7 @@ export async function renderGiftCardPng(cardElement) {
   await waitForFonts(cardElement);
   await waitForImages(cardElement);
 
-  let fontEmbedCSS = "";
-  try {
-    fontEmbedCSS = await getGiftCardFontEmbedCSS();
-  } catch {
-    fontEmbedCSS = "";
-  }
+  const fontEmbedCSS = await getGiftCardFontEmbedCSS().catch(() => "");
 
   const dataUrl = await toPng(cardElement, {
     width,
