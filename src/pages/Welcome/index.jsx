@@ -46,7 +46,6 @@ const HeroFrame = styled.div`
   position: relative;
   width: 18rem;
   max-width: 100%;
-  border-radius: ${({ theme }) => theme.radius.lg};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.colors.cardShadow};
   border: ${({ theme }) =>
@@ -150,10 +149,37 @@ const CtaSection = styled.div`
 
 const CtaBlock = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
-  gap: ${({ theme }) => theme.sizes.lg};
+  justify-content: center;
+  gap: ${({ theme }) => theme.sizes.base};
   width: 100%;
+`;
+
+const DemoButton = styled(Button).attrs({
+  as: "a",
+  $variant: "outline",
+})`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.sizes.x3s};
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.textInverse};
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
+    transform: scale(1.02);
+  }
 `;
 
 const PoweredBy = styled.p`
@@ -234,6 +260,13 @@ const Welcome = () => {
             <Button type="button" onClick={goToCreateWallet}>
               🎁 Start Gifting
             </Button>
+            <DemoButton
+              href="https://app.arcade.software/share/ana1N9Med1fzLpgRwNsN"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ▶️ Watch Demo
+            </DemoButton>
           </CtaBlock>
           <PoweredBy>
             Powered by{" "}

@@ -102,18 +102,14 @@ export async function renderGiftCardPng(cardElement) {
     throw new Error("Gift card element is missing");
   }
 
+  // Logical CSS size; pixelRatio doubles the PNG. transform:none clears preview scale().
   const width = getGiftCardCanonicalWidthPx();
   const height = Math.round(width / GIFT_CARD_ASPECT_RATIO);
 
   await waitForFonts(cardElement);
   await waitForImages(cardElement);
 
-  let fontEmbedCSS = "";
-  try {
-    fontEmbedCSS = await getGiftCardFontEmbedCSS();
-  } catch {
-    fontEmbedCSS = "";
-  }
+  const fontEmbedCSS = await getGiftCardFontEmbedCSS().catch(() => "");
 
   const dataUrl = await toPng(cardElement, {
     width,
@@ -126,6 +122,8 @@ export async function renderGiftCardPng(cardElement) {
     style: {
       transform: "none",
       margin: "0",
+      width: `${width}px`,
+      height: `${height}px`,
       boxSizing: "border-box",
       aspectRatio: "auto",
       lineHeight: "normal",

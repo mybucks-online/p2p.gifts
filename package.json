@@ -2,7 +2,7 @@
   "name": "p2p-gifts",
   "description": "Browser-only gifting wizard: create a disposable crypto gift wallet, fund it, and download a branded gift card with QR (p2p.gifts).",
   "private": true,
-  "version": "1.2.2",
+  "version": "1.2.3",
   "type": "module",
   "keywords": [
     "p2p.gifts",
