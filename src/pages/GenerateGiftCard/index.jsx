@@ -14,7 +14,7 @@ import GiftCardPreview, {
   parseCardStyle,
 } from "@p2p-gifts/components/GiftCardPreview";
 import { resolveDefaultCardTheme } from "@p2p-gifts/components/GiftCardPreview/DefaultCard/themes";
-import Input from "@p2p-gifts/components/Input";
+import GiftNoteEditor from "@p2p-gifts/components/GiftNoteEditor";
 import { Label } from "@p2p-gifts/components/Label";
 import Select from "@p2p-gifts/components/Select";
 import {
@@ -197,20 +197,6 @@ const ThemeSelectWrap = styled.div`
 
 const GiftNoteField = styled.div`
   width: 100%;
-`;
-
-const GiftNoteHint = styled.p`
-  margin: ${({ theme }) => theme.sizes.x3s} 0 0;
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.4;
-`;
-
-const GiftNoteInput = styled(Input)`
-  min-height: 5rem;
-  resize: vertical;
-  margin-bottom: 0;
-  line-height: 1.45;
 `;
 
 const HiddenFileInput = styled.input`
@@ -535,19 +521,8 @@ const GenerateGiftCard = () => {
             ) : null}
 
             <GiftNoteField>
-              <Label htmlFor="gift-note">Gift Note</Label>
-              <GiftNoteInput
-                id="gift-note"
-                as="textarea"
-                rows={3}
-                placeholder="Add a message — **bold**, *italic*, lists"
-                value={giftNote}
-                onChange={(e) => setGiftNote(e.target.value)}
-              />
-              <GiftNoteHint>
-                Markdown: # headings, **bold**, - bullets, blank lines for
-                spacing. Extra spaces are kept for padding and word gaps.
-              </GiftNoteHint>
+              <Label>Gift Note</Label>
+              <GiftNoteEditor onChange={setGiftNote} />
             </GiftNoteField>
 
             <ActionButtons>
