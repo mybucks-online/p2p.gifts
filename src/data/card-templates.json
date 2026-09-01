@@ -10,14 +10,19 @@
     "textColor": "#ffffff"
   },
   {
-    "id": "din-studio-gift-card",
-    "name": "Din Studio Gift Card",
+    "id": "general-gift-card",
+    "name": "General",
     "active": true,
-    "backgroundImage": "din-studio-gift-card.png",
-    "authorHandle": "@din_studio_",
-    "authorProfileUrl": "https://instagram.com/din_studio_",
+    "backgroundImage": "general-gift-card.png",
     "qrColor": "#4e0f9e",
-    "textColor": "#ffffff",
-    "inserted": "June 17, 2026"
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "happy-birthday",
+    "name": "Happy Birthday",
+    "active": true,
+    "backgroundImage": "happy-birthday-template.png",
+    "qrColor": "#3C0197",
+    "textColor": "#ffffff"
   }
 ]
