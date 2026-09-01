@@ -95,6 +95,7 @@ const Content = styled(EditorContent)`
     line-height: 1.45;
     outline: none;
     word-break: break-word;
+    white-space: pre-wrap;
   }
 
   .tiptap p {
