@@ -12,6 +12,7 @@ const noteTypography = css`
   font-weight: ${({ theme }) => theme.weights.regular};
   line-height: 1.45;
   word-break: break-word;
+  white-space: pre-wrap;
   opacity: 0.95;
 
   h1,
