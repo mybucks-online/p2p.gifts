@@ -92,7 +92,7 @@ const Content = styled(EditorContent)`
     color: ${({ theme }) => theme.colors.textStrong};
     font-family: ${({ theme }) => theme.fonts.sans};
     font-size: ${({ theme }) => theme.fontSize.base};
-    line-height: 1.45;
+    line-height: 1.25;
     outline: none;
     word-break: break-word;
     white-space: pre-wrap;
@@ -100,10 +100,24 @@ const Content = styled(EditorContent)`
 
   .tiptap p {
     margin: 0;
+    line-height: 1.25;
   }
 
   .tiptap p + p {
-    margin-top: 0.35em;
+    margin-top: 0.1em;
+  }
+
+  /* Shorter empty lines for fine vertical spacing (Enter between text blocks). */
+  .tiptap p:empty:not(.is-editor-empty:first-child),
+  .tiptap p:has(> br:only-child):not(.is-editor-empty:first-child) {
+    min-height: 0.5em;
+    line-height: 0.5;
+  }
+
+  .tiptap br {
+    display: block;
+    min-height: 0.5em;
+    line-height: 0.5;
   }
 
   .tiptap strong {

@@ -10,7 +10,7 @@ const noteTypography = css`
   text-align: left;
   font-size: ${({ theme }) => theme.fontSize.sm};
   font-weight: ${({ theme }) => theme.weights.regular};
-  line-height: 1.45;
+  line-height: 1.25;
   word-break: break-word;
   white-space: pre-wrap;
   opacity: 0.95;
@@ -31,8 +31,13 @@ const noteTypography = css`
   ul,
   ol {
     display: block;
-    min-height: 1.45em;
-    margin: 0 0 0.35em;
+    margin: 0 0 0.1em;
+  }
+
+  p:empty,
+  p:has(> br:only-child) {
+    min-height: 0.5em;
+    line-height: 0.5;
   }
 
   h1 {
@@ -61,7 +66,7 @@ const noteTypography = css`
 
   p {
     font-weight: ${({ theme }) => theme.weights.regular};
-    line-height: 1.45;
+    line-height: 1.25;
   }
 
   h1:last-child,
@@ -95,7 +100,7 @@ const noteTypography = css`
     display: list-item;
     list-style: inherit;
     font-weight: ${({ theme }) => theme.weights.regular};
-    line-height: 1.45;
+    line-height: 1.25;
   }
 
   blockquote {
@@ -114,8 +119,8 @@ const noteTypography = css`
 
   br {
     display: block;
-    min-height: 1.45em;
-    content: "";
+    min-height: 0.5em;
+    line-height: 0.5;
   }
 `;
 

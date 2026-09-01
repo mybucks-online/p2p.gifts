@@ -11,7 +11,7 @@
   },
   {
     "id": "general-gift-card",
-    "name": "General",
+    "name": "General Gift",
     "active": true,
     "backgroundImage": "general-gift-card.png",
     "qrColor": "#4e0f9e",
