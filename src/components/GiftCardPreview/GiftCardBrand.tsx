@@ -15,7 +15,7 @@ const BrandRoot = styled.div<{
   align-items: center;
   gap: ${({ theme }) => theme.sizes.xs};
   font-weight: ${({ theme }) => theme.weights.bold};
-  font-size: ${({ theme }) => theme.fontSize.lg};
+  font-size: ${({ theme }) => theme.fontSize.base};
   line-height: 1;
   margin-bottom: ${({ $noteSpacing, theme }) =>
     $noteSpacing ? theme.sizes.x3s : 0};
