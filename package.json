@@ -28,9 +28,6 @@
     "url": "https://github.com/mybucks-online/p2p.gifts.git"
   },
   "homepage": "https://p2p.gifts",
-  "resolutions": {
-    "**/axios": "1.16.0"
-  },
   "scripts": {
     "dev": "vite",
     "dev:pwa": "VITE_PWA_DEV=true vite",
