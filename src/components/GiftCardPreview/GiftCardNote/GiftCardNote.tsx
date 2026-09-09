@@ -165,7 +165,7 @@ export default function GiftCardNote({
   if (!hasText) {
     return (
       <NoteRoot $shadow={shadow} aria-hidden>
-        <Placeholder>Your gift note</Placeholder>
+        <Placeholder data-export-hidden>Your gift note</Placeholder>
       </NoteRoot>
     );
   }

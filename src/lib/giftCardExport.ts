@@ -121,6 +121,8 @@ export async function renderGiftCardPng(
     preferredFontFormat: "woff2",
     fontEmbedCSS: fontEmbedCSS || undefined,
     skipFonts: !fontEmbedCSS,
+    filter: (node) =>
+      !(node instanceof HTMLElement && node.hasAttribute("data-export-hidden")),
     style: {
       transform: "none",
       margin: "0",
