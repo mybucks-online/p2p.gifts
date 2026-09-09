@@ -45,7 +45,10 @@ import {
   preloadGiftQrLogo,
   waitForQrCanvasPaint,
 } from "@p2p-gifts/lib/giftCardExport";
+import { CLAIM_APP_ORIGIN } from "@p2p-gifts/lib/site";
 import { sizes as breakpoints } from "@p2p-gifts/styles/media";
+
+const QR_DOMAIN = CLAIM_APP_ORIGIN.replace(/^https?:\/\//, "");
 
 const DESKTOP_MIN = breakpoints.lg + 1;
 
@@ -151,6 +154,19 @@ const TemplateAttribution = styled.p`
       text-decoration: underline;
     }
   }
+`;
+
+const QrDomainNote = styled.p`
+  margin: ${({ theme }) => theme.sizes.x3s} 0 0;
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  text-align: center;
+  line-height: 1.4;
+`;
+
+const QrDomainHighlight = styled.span`
+  font-weight: ${({ theme }) => theme.weights.bold};
+  color: ${({ theme }) => theme.colors.textStrong};
 `;
 
 const SettingsColumn = styled.section`
@@ -464,6 +480,12 @@ const GenerateGiftCard = () => {
                 />
               )}
             </GiftCardPreview>
+            {giftingLink ? (
+              <QrDomainNote>
+                The QR code contains a URL of{" "}
+                <QrDomainHighlight>{QR_DOMAIN}</QrDomainHighlight> ☝️
+              </QrDomainNote>
+            ) : null}
             {activeTemplate && hasTemplateAttribution(activeTemplate) ? (
               <TemplateAttribution>
                 Template by{" "}
