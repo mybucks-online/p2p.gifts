@@ -504,9 +504,9 @@ const GenerateGiftCard = () => {
             <SettingsHeader>
               <SettingsStepTitle step={3}>Generate Gift Card</SettingsStepTitle>
               <WizardStepSummary>
-                {isCustomFormat
+                {isUploadCustom
                   ? "Upload your image, add a note, and download your gift card"
-                  : "Choose a theme and download your gift card"}
+                  : "Choose a card style, add a note, and download your gift card"}
               </WizardStepSummary>
             </SettingsHeader>
 
