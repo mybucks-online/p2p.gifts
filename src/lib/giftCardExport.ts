@@ -10,10 +10,21 @@ import { SITE_NAME, SITE_URL } from "@p2p-gifts/lib/site";
 
 const EXPORT_PIXEL_RATIO = 2;
 const INTER_FONT_FAMILY = "Inter";
-const INTER_STYLESHEET_URL =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
+const GIFT_CARD_WEB_FONTS = [
+  { family: "Inter", weights: "400;500;600;700" },
+  { family: "Pacifico", weights: "400" },
+  { family: "Fredoka", weights: "400;500;600;700" },
+  { family: "Grand Hotel", weights: "400" },
+  { family: "Dancing Script", weights: "400;500;600;700" },
+  { family: "Montserrat", weights: "400;500;600;700" },
+  { family: "Poppins", weights: "400;500;600;700" },
+];
+const GIFT_CARD_FONTS_STYLESHEET_URL = `https://fonts.googleapis.com/css2?${GIFT_CARD_WEB_FONTS.map(
+  ({ family, weights }) =>
+    `family=${family.replace(/ /g, "+")}:wght@${weights}`,
+).join("&")}&display=swap`;
 
-let interFontEmbedCssCache: string | null = null;
+let giftCardFontEmbedCssCache: string | null = null;
 
 async function readBlobAsDataUrl(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -24,15 +35,15 @@ async function readBlobAsDataUrl(blob: Blob): Promise<string> {
   });
 }
 
-/** Fetch Inter CSS + font files directly — avoids cross-origin cssRules SecurityError. */
+/** Fetch gift card web font CSS + font files directly — avoids cross-origin cssRules SecurityError. */
 async function getGiftCardFontEmbedCSS(): Promise<string> {
-  if (interFontEmbedCssCache) {
-    return interFontEmbedCssCache;
+  if (giftCardFontEmbedCssCache) {
+    return giftCardFontEmbedCssCache;
   }
 
-  const response = await fetch(INTER_STYLESHEET_URL);
+  const response = await fetch(GIFT_CARD_FONTS_STYLESHEET_URL);
   if (!response.ok) {
-    throw new Error("Could not fetch Inter stylesheet");
+    throw new Error("Could not fetch gift card fonts stylesheet");
   }
 
   let cssText = await response.text();
@@ -45,7 +56,7 @@ async function getGiftCardFontEmbedCSS(): Promise<string> {
     [...new Set(rawUrls)].map(async (rawUrl) => {
       const fontUrl = rawUrl.startsWith("http")
         ? rawUrl
-        : new URL(rawUrl, INTER_STYLESHEET_URL).href;
+        : new URL(rawUrl, GIFT_CARD_FONTS_STYLESHEET_URL).href;
       const fontResponse = await fetch(fontUrl);
       if (!fontResponse.ok) {
         throw new Error(`Could not fetch font: ${fontUrl}`);
@@ -55,7 +66,7 @@ async function getGiftCardFontEmbedCSS(): Promise<string> {
     }),
   );
 
-  interFontEmbedCssCache = cssText;
+  giftCardFontEmbedCssCache = cssText;
   return cssText;
 }
 
@@ -94,6 +105,10 @@ async function waitForFonts(cardElement: HTMLElement): Promise<void> {
     document.fonts.load(`700 ${fontSize} ${fontFamily}`),
     document.fonts.load(`500 0.875rem ${INTER_FONT_FAMILY}`),
     document.fonts.load(`700 1.125rem ${INTER_FONT_FAMILY}`),
+    ...GIFT_CARD_WEB_FONTS.flatMap(({ family }) => [
+      document.fonts.load(`400 ${fontSize} ${family}`),
+      document.fonts.load(`700 ${fontSize} ${family}`),
+    ]),
   ]);
 }
 

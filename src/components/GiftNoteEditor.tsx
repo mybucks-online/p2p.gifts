@@ -147,6 +147,12 @@ const FONT_FAMILIES = [
   ["Courier New", "Courier New"],
   ["Georgia", "Georgia"],
   ["Inter", "Inter"],
+  ["Pacifico", "Pacifico"],
+  ["Fredoka", "Fredoka"],
+  ["Grand Hotel", "Grand Hotel"],
+  ["Dancing Script", "Dancing Script"],
+  ["Montserrat", "Montserrat"],
+  ["Poppins", "Poppins"],
 ];
 
 const FONT_SIZES = [
@@ -244,7 +250,7 @@ export default function GiftNoteEditor({
           }
         >
           {FONT_FAMILIES.map(([value, label]) => (
-            <option key={value} value={value}>
+            <option key={value} value={value} style={{ fontFamily: value }}>
               {label}
             </option>
           ))}
