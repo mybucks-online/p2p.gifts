@@ -24,5 +24,13 @@
     "backgroundImage": "happy-birthday-template.png",
     "qrColor": "#3C0197",
     "textColor": "#ffffff"
+  },
+  {
+    "id": "thank-you",
+    "name": "Thank you / Appreciation",
+    "active": true,
+    "backgroundImage": "thank-you-template.png",
+    "qrColor": "#5064f9",
+    "textColor": "#ffffff"
   }
 ]
