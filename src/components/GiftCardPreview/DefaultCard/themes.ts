@@ -1,24 +1,9 @@
 /** Gradient themes for the default gift card format */
 const DEFAULT_CARD_THEMES = {
-  "modern-blue": {
-    label: "Modern Blue",
-    from: "#3b82f6",
-    to: "#1d4ed8",
-  },
   "elegant-purple": {
     label: "Elegant Purple",
     from: "#a855f7",
     to: "#7e22ce",
-  },
-  "festive-gold": {
-    label: "Festive Gold",
-    from: "#eab308",
-    to: "#ea580c",
-  },
-  "minimalist-dark": {
-    label: "Minimalist Dark",
-    from: "#1f2937",
-    to: "#111827",
   },
   "crypto-gradient": {
     label: "Crypto Gradient",
