@@ -32,5 +32,13 @@
     "backgroundImage": "thank-you-template.png",
     "qrColor": "#5064f9",
     "textColor": "#ffffff"
+  },
+  {
+    "id": "merry-christmas",
+    "name": "Merry Christmas",
+    "active": true,
+    "backgroundImage": "merry-christmas-template.png",
+    "qrColor": "#b21318",
+    "textColor": "#ffffff"
   }
 ]
