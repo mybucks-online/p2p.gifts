@@ -29,7 +29,7 @@ export function getCardTemplateBackgroundUrl(
   const { backgroundImage } = template;
   return backgroundImage.startsWith("/")
     ? backgroundImage
-    : `/cards/${backgroundImage}`;
+    : `/templates/${backgroundImage}`;
 }
 
 export function getCardTemplateQrColor(

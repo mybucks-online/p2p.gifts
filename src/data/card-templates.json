@@ -21,15 +21,23 @@
     "id": "happy-birthday",
     "name": "Happy Birthday",
     "active": true,
-    "backgroundImage": "happy-birthday-template.png",
+    "backgroundImage": "happy-birthday.png",
     "qrColor": "#3C0197",
     "textColor": "#ffffff"
+  },
+  {
+    "id": "congratulations",
+    "name": "Congratulations",
+    "active": true,
+    "backgroundImage": "congratulations.png",
+    "qrColor": "#338265",
+    "textColor": "#338265"
   },
   {
     "id": "thank-you",
     "name": "Thank you / Appreciation",
     "active": true,
-    "backgroundImage": "thank-you-template.png",
+    "backgroundImage": "thank-you.png",
     "qrColor": "#5064f9",
     "textColor": "#ffffff"
   },
@@ -37,7 +45,7 @@
     "id": "merry-christmas",
     "name": "Merry Christmas",
     "active": true,
-    "backgroundImage": "merry-christmas-template.png",
+    "backgroundImage": "merry-christmas.png",
     "qrColor": "#b71313",
     "textColor": "#ffffff"
   }
