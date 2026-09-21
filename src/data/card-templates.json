@@ -26,6 +26,14 @@
     "textColor": "#ffffff"
   },
   {
+    "id": "congratulations",
+    "name": "Congratulations",
+    "active": true,
+    "backgroundImage": "congratulations-template.png",
+    "qrColor": "#338265",
+    "textColor": "#338265"
+  },
+  {
     "id": "thank-you",
     "name": "Thank you / Appreciation",
     "active": true,
