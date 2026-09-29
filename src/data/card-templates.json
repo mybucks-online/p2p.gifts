@@ -18,6 +18,14 @@
     "textColor": "#ffffff"
   },
   {
+    "id": "thank-you",
+    "name": "Thank you / Appreciation",
+    "active": true,
+    "backgroundImage": "thank-you.png",
+    "qrColor": "#5064f9",
+    "textColor": "#ffffff"
+  },
+  {
     "id": "happy-birthday",
     "name": "Happy Birthday",
     "active": true,
@@ -34,12 +42,12 @@
     "textColor": "#338265"
   },
   {
-    "id": "thank-you",
-    "name": "Thank you / Appreciation",
+    "id": "happy-holidays",
+    "name": "Happy Holidays",
     "active": true,
-    "backgroundImage": "thank-you.png",
-    "qrColor": "#5064f9",
-    "textColor": "#ffffff"
+    "backgroundImage": "happy-holidays.png",
+    "qrColor": "#063d5c",
+    "textColor": "#cc955d"
   },
   {
     "id": "merry-christmas",
