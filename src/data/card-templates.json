@@ -18,8 +18,16 @@
     "textColor": "#ffffff"
   },
   {
+    "id": "coffee-on-me",
+    "name": "Coffee on Me",
+    "active": true,
+    "backgroundImage": "coffee-on-me.png",
+    "qrColor": "#4b1b07",
+    "textColor": "#4b1b07"
+  },
+  {
     "id": "thank-you",
-    "name": "Thank you / Appreciation",
+    "name": "Thank you",
     "active": true,
     "backgroundImage": "thank-you.png",
     "qrColor": "#5064f9",
