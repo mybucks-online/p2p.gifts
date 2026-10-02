@@ -38,6 +38,11 @@
     "typecheck": "tsc --noEmit",
     "preview": "vite preview"
   },
+  "resolutions": {
+    "fast-uri": "3.1.7",
+    "nanoid": "3.3.19",
+    "axios": "1.20.0"
+  },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
     "@mybucks.online/core": "^3.0.10",
