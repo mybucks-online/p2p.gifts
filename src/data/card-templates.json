@@ -22,8 +22,8 @@
     "name": "Coffee on Me",
     "active": true,
     "backgroundImage": "coffee-on-me.png",
-    "qrColor": "#56c0dc",
-    "textColor": "#56c0dc"
+    "qrColor": "#4b1b07",
+    "textColor": "#4b1b07"
   },
   {
     "id": "thank-you",
