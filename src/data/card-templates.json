@@ -26,6 +26,14 @@
     "textColor": "#4b1b07"
   },
   {
+    "id": "good-luck",
+    "name": "Good Luck",
+    "active": true,
+    "backgroundImage": "good-luck.png",
+    "qrColor": "#06571b",
+    "textColor": "#d4910e"
+  },
+  {
     "id": "thank-you",
     "name": "Thank you",
     "active": true,
