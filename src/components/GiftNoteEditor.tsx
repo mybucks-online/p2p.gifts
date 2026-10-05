@@ -144,8 +144,6 @@ const Content = styled(EditorContent)`
 
 const FONT_FAMILIES = [
   ["Arial", "Arial"],
-  ["Courier New", "Courier New"],
-  ["Georgia", "Georgia"],
   ["Inter", "Inter"],
   ["Pacifico", "Pacifico"],
   ["Fredoka", "Fredoka"],

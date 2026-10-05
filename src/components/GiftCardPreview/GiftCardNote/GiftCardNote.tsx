@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 
-import { giftCardTextStyles } from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
+import {
+  giftCardTextOutlineStyles,
+  giftCardTextStyles,
+} from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
 
 interface GiftCardNoteProps {
   note?: string;
@@ -132,23 +135,7 @@ const noteTypography = css`
 const NoteRoot = styled.div<{ $shadow: boolean }>`
   ${noteTypography}
 
-  ${({ $shadow }) =>
-    $shadow &&
-    css`
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      li,
-      strong,
-      em,
-      blockquote {
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
-      }
-    `}
+  ${({ $shadow }) => $shadow && giftCardTextOutlineStyles}
 `;
 
 const Placeholder = styled.span`
