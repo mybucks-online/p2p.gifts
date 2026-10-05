@@ -26,12 +26,20 @@
     "textColor": "#4b1b07"
   },
   {
+    "id": "good-luck",
+    "name": "Good Luck",
+    "active": true,
+    "backgroundImage": "good-luck.png",
+    "qrColor": "#06571b",
+    "textColor": "#053505"
+  },
+  {
     "id": "thank-you",
     "name": "Thank you",
     "active": true,
     "backgroundImage": "thank-you.png",
     "qrColor": "#5064f9",
-    "textColor": "#ffffff"
+    "textColor": "#fb5ad9"
   },
   {
     "id": "happy-birthday",
@@ -55,7 +63,7 @@
     "active": true,
     "backgroundImage": "happy-holidays.png",
     "qrColor": "#063d5c",
-    "textColor": "#cc955d"
+    "textColor": "#e7d8b4"
   },
   {
     "id": "merry-christmas",

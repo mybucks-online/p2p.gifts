@@ -27,7 +27,7 @@ export const CARD_FORMAT_ID_DEFAULT = "default";
 
 const CUSTOM_CARD_STYLE_VALUE = "custom";
 
-export const CARD_STYLE_ID_DEFAULT = `${CARD_FORMAT_ID_DEFAULT}:${DEFAULT_CARD_THEME_ID_DEFAULT}`;
+export const CARD_STYLE_ID_DEFAULT = `${CUSTOM_CARD_STYLE_VALUE}:general-gift-card`;
 
 const BUILTIN_CARD_STYLE_GROUP_LABEL = "Built-in";
 
