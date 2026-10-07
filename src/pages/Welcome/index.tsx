@@ -262,7 +262,7 @@ const Welcome = () => {
             </Button>
             <DemoButton
               as="a"
-              href="https://app.arcade.software/share/ana1N9Med1fzLpgRwNsN"
+              href="https://app.arcade.software/share/cKcDkM4md7f3zcRbbheR"
               target="_blank"
               rel="noopener noreferrer"
             >
