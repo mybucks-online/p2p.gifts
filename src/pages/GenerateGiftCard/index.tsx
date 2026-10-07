@@ -156,12 +156,18 @@ const TemplateAttribution = styled.p`
   }
 `;
 
-const QrDomainNote = styled.p`
+const QrDomainNote = styled.ul`
+  align-self: center;
   margin: ${({ theme }) => theme.sizes.x3s} 0 0;
+  padding-left: ${({ theme }) => theme.sizes.lg};
   font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.colors.textMuted};
-  text-align: center;
+  text-align: left;
   line-height: 1.4;
+
+  & > li {
+    list-style: disc outside;
+  }
 `;
 
 const QrDomainHighlight = styled.span`
@@ -271,7 +277,9 @@ const ActionButtons = styled.div`
   & > button {
     flex: 1 1 calc(33.333% - ${({ theme }) => theme.sizes.base});
     min-width: 0;
+    min-height: 44px;
     width: auto;
+    padding-block: ${({ theme }) => theme.sizes.xs};
     padding-inline: ${({ theme }) => theme.sizes.sm};
     font-size: ${({ theme }) => theme.fontSize.sm};
   }
@@ -282,6 +290,7 @@ const ActionButtons = styled.div`
     & > button {
       flex: 1 1 auto;
       width: 100%;
+      padding-block: ${({ theme }) => theme.sizes.x2s};
       padding-inline: ${({ theme }) => theme.sizes.xl};
       font-size: ${({ theme }) => theme.fontSize.base};
     }
@@ -482,8 +491,11 @@ const GenerateGiftCard = () => {
             </GiftCardPreview>
             {giftingLink ? (
               <QrDomainNote>
-                The QR code contains a URL of{" "}
-                <QrDomainHighlight>{QR_DOMAIN}</QrDomainHighlight> ☝️
+                <li>
+                  The QR code contains a URL of{" "}
+                  <QrDomainHighlight>{QR_DOMAIN}</QrDomainHighlight>. ☝️
+                </li>
+                <li>No sign-up or app install required to claim.</li>
               </QrDomainNote>
             ) : null}
             {activeTemplate && hasTemplateAttribution(activeTemplate) ? (
@@ -568,7 +580,7 @@ const GenerateGiftCard = () => {
                 }
                 onClick={handleDownloadImage}
               >
-                {downloading ? "Saving…" : "Download Image"}
+                {downloading ? "Saving…" : "Download Gift Card"}
               </Button>
               <Button
                 type="button"
@@ -584,7 +596,7 @@ const GenerateGiftCard = () => {
                 disabled={!giftingLink}
                 onClick={handleCopyGiftingLink}
               >
-                Copy Gifting Link
+                Copy Gift Link
               </Button>
             </ActionButtons>
           </SettingsColumn>
