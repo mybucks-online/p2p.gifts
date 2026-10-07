@@ -18,28 +18,20 @@
     "textColor": "#ffffff"
   },
   {
-    "id": "coffee-on-me",
-    "name": "Coffee on Me",
-    "active": true,
-    "backgroundImage": "coffee-on-me.png",
-    "qrColor": "#4b1b07",
-    "textColor": "#4b1b07"
-  },
-  {
-    "id": "good-luck",
-    "name": "Good Luck",
-    "active": true,
-    "backgroundImage": "good-luck.png",
-    "qrColor": "#06571b",
-    "textColor": "#053505"
-  },
-  {
     "id": "top-up",
     "name": "Top Up",
     "active": true,
     "backgroundImage": "top-up.png",
     "qrColor": "#0006e1",
     "textColor": "#4ae300"
+  },
+  {
+    "id": "coffee-on-me",
+    "name": "Coffee on Me",
+    "active": true,
+    "backgroundImage": "coffee-on-me.png",
+    "qrColor": "#4b1b07",
+    "textColor": "#4b1b07"
   },
   {
     "id": "thank-you",
@@ -56,6 +48,14 @@
     "backgroundImage": "happy-birthday.png",
     "qrColor": "#3C0197",
     "textColor": "#ffffff"
+  },
+  {
+    "id": "good-luck",
+    "name": "Good Luck",
+    "active": true,
+    "backgroundImage": "good-luck.png",
+    "qrColor": "#06571b",
+    "textColor": "#053505"
   },
   {
     "id": "congratulations",
