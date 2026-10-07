@@ -34,6 +34,14 @@
     "textColor": "#053505"
   },
   {
+    "id": "top-up",
+    "name": "Top Up",
+    "active": true,
+    "backgroundImage": "top-up.png",
+    "qrColor": "#0006e1",
+    "textColor": "#4ae300"
+  },
+  {
     "id": "thank-you",
     "name": "Thank you",
     "active": true,
