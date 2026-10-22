@@ -54,7 +54,7 @@ yarn build
 
 ### Umami analytics
 
-Production builds set `VITE_UMAMI_WEBSITE_ID` at build time; Vite substitutes it into `index.html` for the Umami script tag (page views only; no wallet credentials). CSP allows `https://cloud.umami.is` in `index.html`.
+Production builds set `VITE_UMAMI_WEBSITE_ID` at build time; Vite substitutes it into `index.html` for the Umami script tag. In addition to page views, gift card action buttons track clicks named `download-gift-card`, `download-qr-code`, and `copy-gifting-link`. These events add only static event names, with no custom properties, gifting links, wallet credentials, notes, or image contents. Umami's standard page/session metadata still applies. CSP allows `https://cloud.umami.is` in `index.html`.
 
 **GitHub Actions:** add repository secret `VITE_UMAMI_WEBSITE_ID` (your Umami website UUID).
 
