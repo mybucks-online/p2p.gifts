@@ -579,6 +579,7 @@ const GenerateGiftCard = () => {
                   downloading || (isCustomFormat && !customBackgroundImage)
                 }
                 onClick={handleDownloadImage}
+                data-umami-event="download-gift-card"
               >
                 {downloading ? "Saving…" : "Download Gift Card"}
               </Button>
@@ -587,6 +588,7 @@ const GenerateGiftCard = () => {
                 $size="block"
                 disabled={!giftingLink || downloadingQr}
                 onClick={handleDownloadQrCode}
+                data-umami-event="download-qr-code"
               >
                 {downloadingQr ? "Saving…" : "Download QR Code"}
               </Button>
@@ -595,6 +597,7 @@ const GenerateGiftCard = () => {
                 $size="block"
                 disabled={!giftingLink}
                 onClick={handleCopyGiftingLink}
+                data-umami-event="copy-gifting-link"
               >
                 Copy Gift Link
               </Button>
