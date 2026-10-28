@@ -74,6 +74,14 @@
     "textColor": "#eec19a"
   },
   {
+    "id": "happy-halloween",
+    "name": "Happy Halloween",
+    "active": true,
+    "backgroundImage": "halloween-day.png",
+    "qrColor": "#140545",
+    "textColor": "#fbcb04"
+  },
+  {
     "id": "merry-christmas",
     "name": "Merry Christmas",
     "active": true,
