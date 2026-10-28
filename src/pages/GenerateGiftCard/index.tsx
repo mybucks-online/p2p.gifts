@@ -411,9 +411,11 @@ const GenerateGiftCard = () => {
 
     setDownloading(true);
     try {
-      const filename = isCustomFormat
-        ? "gift-card-custom.png"
-        : `gift-card-${theme}.png`;
+      const filename = activeTemplate
+        ? `${activeTemplate.id}.png`
+        : isCustomFormat
+          ? "gift-card-custom.png"
+          : `gift-card-${theme}.png`;
       await downloadGiftCardImage(cardExportRef.current, filename);
       toast("Gift card image saved.");
     } catch {
