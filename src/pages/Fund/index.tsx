@@ -211,6 +211,7 @@ const Fund = () => {
             <AddressButton
               type="button"
               onClick={copyAddress}
+              data-umami-event="copy-address"
               aria-label="Copy address"
             >
               {account.address}
@@ -218,6 +219,7 @@ const Fund = () => {
             <CopyAddressButton
               type="button"
               onClick={copyAddress}
+              data-umami-event="copy-address"
               aria-label="Copy address"
             >
               <img src={CopyIcon} alt="" />
