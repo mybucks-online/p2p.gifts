@@ -211,6 +211,7 @@ const Fund = () => {
             <AddressButton
               type="button"
               onClick={copyAddress}
+              data-umami-event="copy-address"
               aria-label="Copy address"
             >
               {account.address}
@@ -218,6 +219,7 @@ const Fund = () => {
             <CopyAddressButton
               type="button"
               onClick={copyAddress}
+              data-umami-event="copy-address"
               aria-label="Copy address"
             >
               <img src={CopyIcon} alt="" />
@@ -226,6 +228,7 @@ const Fund = () => {
           <VerifyDepositWrap>
             <VerifyDepositLink
               href={account.linkOfAddress(account.address)}
+              data-umami-event="verify-deposit"
               target="_blank"
               rel="noopener noreferrer"
             >
