@@ -228,6 +228,7 @@ const Fund = () => {
           <VerifyDepositWrap>
             <VerifyDepositLink
               href={account.linkOfAddress(account.address)}
+              data-umami-event="verify-deposit"
               target="_blank"
               rel="noopener noreferrer"
             >
