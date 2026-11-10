@@ -2,7 +2,6 @@ import {
   type ChangeEvent,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -15,12 +14,8 @@ import { BackIcon } from "@p2p-gifts/assets/icons";
 import Button from "@p2p-gifts/components/Button";
 import { Container } from "@p2p-gifts/components/Containers";
 import GiftCardPreview, {
-  CARD_STYLE_GROUPS,
-  CARD_STYLE_ID_DEFAULT,
-  getCardFormatConfig,
-  parseCardStyle,
+  CustomCard,
 } from "@p2p-gifts/components/GiftCardPreview";
-import { resolveDefaultCardTheme } from "@p2p-gifts/components/GiftCardPreview/DefaultCard/themes";
 import GiftNoteEditor from "@p2p-gifts/components/GiftNoteEditor";
 import { Label } from "@p2p-gifts/components/Label";
 import Select from "@p2p-gifts/components/Select";
@@ -31,6 +26,8 @@ import {
 } from "@p2p-gifts/components/Texts";
 import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
 import {
+  CARD_STYLE_GROUPS,
+  DEFAULT_CARD_TEMPLATE_ID,
   getCardTemplateBackgroundUrl,
   getCardTemplateById,
   getCardTemplateQrColor,
@@ -309,15 +306,8 @@ const MAX_CUSTOM_IMAGE_BYTES = 8 * 1024 * 1024;
 
 const GenerateGiftCard = () => {
   const { setActiveStep, giftingLink } = useContext(StoreContext);
-  const [cardStyle, setCardStyle] = useState(CARD_STYLE_ID_DEFAULT);
-  const {
-    format: cardFormat,
-    theme: rawTheme,
-    templateId,
-  } = parseCardStyle(cardStyle);
-  const theme = rawTheme ?? undefined;
-  const formatConfig = getCardFormatConfig(cardFormat);
-  const activeTemplate = templateId ? getCardTemplateById(templateId) : null;
+  const [cardStyle, setCardStyle] = useState(DEFAULT_CARD_TEMPLATE_ID);
+  const activeTemplate = getCardTemplateById(cardStyle);
   const [giftNote, setGiftNote] = useState("");
   const [customBackgroundImage, setCustomBackgroundImage] = useState("");
   const [customImageName, setCustomImageName] = useState("");
@@ -325,35 +315,11 @@ const GenerateGiftCard = () => {
   const [downloadingQr, setDownloadingQr] = useState(false);
   const cardExportRef = useRef<HTMLDivElement>(null);
   const qrExportRef = useRef<HTMLCanvasElement>(null);
-  const backgroundFileInputRef = useRef<HTMLInputElement>(null);
-  const CardComponent = formatConfig.Component;
-  const isCustomFormat = formatConfig.supportsCustomImage;
-  const isUploadCustom = isCustomFormat && !templateId;
-  const qrFgColor = useMemo(() => {
-    if (isCustomFormat) {
-      return getCardTemplateQrColor(activeTemplate);
-    }
-    return resolveDefaultCardTheme(theme).to;
-  }, [isCustomFormat, activeTemplate, theme]);
-
-  useEffect(() => {
-    if (!isCustomFormat) return;
-
-    if (templateId) {
-      const template = getCardTemplateById(templateId);
-      if (!template) return;
-
-      setCustomBackgroundImage(getCardTemplateBackgroundUrl(template));
-      setCustomImageName(template.name);
-      return;
-    }
-
-    setCustomBackgroundImage("");
-    setCustomImageName("");
-    if (backgroundFileInputRef.current) {
-      backgroundFileInputRef.current.value = "";
-    }
-  }, [isCustomFormat, templateId]);
+  const isUploadCustom = cardStyle === "";
+  const backgroundImage = activeTemplate
+    ? getCardTemplateBackgroundUrl(activeTemplate)
+    : customBackgroundImage;
+  const qrFgColor = getCardTemplateQrColor(activeTemplate);
 
   useEffect(() => {
     if (giftingLink) {
@@ -404,7 +370,7 @@ const GenerateGiftCard = () => {
 
   const handleDownloadImage = async () => {
     if (!cardExportRef.current || downloading) return;
-    if (isCustomFormat && !customBackgroundImage) {
+    if (!backgroundImage) {
       toast("Upload a background image first.");
       return;
     }
@@ -413,9 +379,7 @@ const GenerateGiftCard = () => {
     try {
       const filename = activeTemplate
         ? `${activeTemplate.id}.png`
-        : isCustomFormat
-          ? "gift-card-custom.png"
-          : `gift-card-${theme}.png`;
+        : "gift-card-custom.png";
       await downloadGiftCardImage(cardExportRef.current, filename);
       toast("Gift card image saved.");
     } catch {
@@ -473,23 +437,14 @@ const GenerateGiftCard = () => {
           <PreviewColumn>
             <PreviewHeading>Preview</PreviewHeading>
             <GiftCardPreview>
-              {isCustomFormat ? (
-                <CardComponent
-                  ref={cardExportRef}
-                  backgroundImage={customBackgroundImage}
-                  note={giftNote}
-                  giftingLink={giftingLink}
-                  qrColor={getCardTemplateQrColor(activeTemplate)}
-                  textColor={getCardTemplateTextColor(activeTemplate)}
-                />
-              ) : (
-                <CardComponent
-                  ref={cardExportRef}
-                  theme={theme}
-                  note={giftNote}
-                  giftingLink={giftingLink}
-                />
-              )}
+              <CustomCard
+                ref={cardExportRef}
+                backgroundImage={backgroundImage}
+                note={giftNote}
+                giftingLink={giftingLink}
+                qrColor={getCardTemplateQrColor(activeTemplate)}
+                textColor={getCardTemplateTextColor(activeTemplate)}
+              />
             </GiftCardPreview>
             {giftingLink ? (
               <QrDomainNote>
@@ -530,7 +485,11 @@ const GenerateGiftCard = () => {
                 <Select
                   id="gift-card-style"
                   value={cardStyle}
-                  onChange={(e) => setCardStyle(e.target.value)}
+                  onChange={(e) => {
+                    setCardStyle(e.target.value);
+                    setCustomBackgroundImage("");
+                    setCustomImageName("");
+                  }}
                 >
                   {CARD_STYLE_GROUPS.map((group) => (
                     <optgroup key={group.label} label={group.label}>
@@ -549,7 +508,6 @@ const GenerateGiftCard = () => {
               <ThemeField>
                 <Label htmlFor="gift-card-background">Background Image</Label>
                 <HiddenFileInput
-                  ref={backgroundFileInputRef}
                   id="gift-card-background"
                   type="file"
                   accept="image/*"
@@ -577,9 +535,7 @@ const GenerateGiftCard = () => {
               <Button
                 type="button"
                 $size="block"
-                disabled={
-                  downloading || (isCustomFormat && !customBackgroundImage)
-                }
+                disabled={downloading || !backgroundImage}
                 onClick={handleDownloadImage}
                 data-umami-event="download-gift-card"
               >

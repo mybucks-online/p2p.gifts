@@ -68,20 +68,9 @@ const GiftCardPreview = ({ children }: { children: ReactNode }) => {
 
 export default GiftCardPreview;
 export {
-  CARD_STYLE_GROUPS,
-  CARD_STYLE_ID_DEFAULT,
-  getCardFormatConfig,
-  parseCardStyle,
-} from "@p2p-gifts/components/GiftCardPreview/cardFormats";
-export {
   getGiftCardCanonicalWidthPx,
   GIFT_CARD_ASPECT_RATIO,
   GIFT_CARD_QR_SIZE,
   GIFT_CARD_WIDTH_REM,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
 export { default as CustomCard } from "@p2p-gifts/components/GiftCardPreview/CustomCard";
-export { default as DefaultCard } from "@p2p-gifts/components/GiftCardPreview/DefaultCard";
-export {
-  DEFAULT_CARD_THEME_ID_DEFAULT,
-  DEFAULT_CARD_THEME_OPTIONS,
-} from "@p2p-gifts/components/GiftCardPreview/DefaultCard";

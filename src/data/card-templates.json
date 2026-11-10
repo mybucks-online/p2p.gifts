@@ -10,6 +10,14 @@
     "textColor": "#ffffff"
   },
   {
+    "id": "crypto-gradient",
+    "name": "Crypto Gradient",
+    "active": true,
+    "backgroundImage": "crypto-gradient.png",
+    "qrColor": "#7c3aed",
+    "textColor": "#ffffff"
+  },
+  {
     "id": "general-gift-card",
     "name": "General Gift",
     "active": true,
