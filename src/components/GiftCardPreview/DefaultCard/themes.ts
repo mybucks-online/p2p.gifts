@@ -1,10 +1,5 @@
 /** Gradient themes for the default gift card format */
 const DEFAULT_CARD_THEMES = {
-  "elegant-purple": {
-    label: "Elegant Purple",
-    from: "#a855f7",
-    to: "#7e22ce",
-  },
   "crypto-gradient": {
     label: "Crypto Gradient",
     from: "#2563eb",
