@@ -12,6 +12,11 @@ import styled from "styled-components";
 
 import { BackIcon } from "@p2p-gifts/assets/icons";
 import Button from "@p2p-gifts/components/Button";
+import {
+  ColorPalette,
+  COLORS,
+  ColorSwatch,
+} from "@p2p-gifts/components/ColorPalette";
 import { Container } from "@p2p-gifts/components/Containers";
 import GiftCardPreview, {
   CustomCard,
@@ -28,6 +33,7 @@ import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
 import {
   CARD_STYLE_GROUPS,
   DEFAULT_CARD_TEMPLATE_ID,
+  DEFAULT_CARD_TEMPLATE_QR_COLOR,
   getCardTemplateBackgroundUrl,
   getCardTemplateById,
   getCardTemplateQrColor,
@@ -311,6 +317,9 @@ const GenerateGiftCard = () => {
   const [giftNote, setGiftNote] = useState("");
   const [customBackgroundImage, setCustomBackgroundImage] = useState("");
   const [customImageName, setCustomImageName] = useState("");
+  const [customQrColor, setCustomQrColor] = useState(
+    DEFAULT_CARD_TEMPLATE_QR_COLOR,
+  );
   const [downloading, setDownloading] = useState(false);
   const [downloadingQr, setDownloadingQr] = useState(false);
   const cardExportRef = useRef<HTMLDivElement>(null);
@@ -319,7 +328,9 @@ const GenerateGiftCard = () => {
   const backgroundImage = activeTemplate
     ? getCardTemplateBackgroundUrl(activeTemplate)
     : customBackgroundImage;
-  const qrFgColor = getCardTemplateQrColor(activeTemplate);
+  const qrFgColor = isUploadCustom
+    ? customQrColor
+    : getCardTemplateQrColor(activeTemplate);
 
   useEffect(() => {
     if (giftingLink) {
@@ -442,7 +453,7 @@ const GenerateGiftCard = () => {
                 backgroundImage={backgroundImage}
                 note={giftNote}
                 giftingLink={giftingLink}
-                qrColor={getCardTemplateQrColor(activeTemplate)}
+                qrColor={qrFgColor}
                 textColor={getCardTemplateTextColor(activeTemplate)}
               />
             </GiftCardPreview>
@@ -523,6 +534,38 @@ const GenerateGiftCard = () => {
                     {customImageName || "PNG or JPG, up to 8 MB"}
                   </FileNameHint>
                 </FileHintRow>
+              </ThemeField>
+            ) : null}
+
+            {isUploadCustom ? (
+              <ThemeField>
+                <Label id="gift-card-qr-color-label">QR Code Color</Label>
+                <ColorPalette
+                  role="group"
+                  aria-labelledby="gift-card-qr-color-label"
+                >
+                  {COLORS.filter(([color]) => color !== "#ffffff").map(
+                    ([color, label]) => {
+                      const value =
+                        color === "auto"
+                          ? DEFAULT_CARD_TEMPLATE_QR_COLOR
+                          : color;
+                      return (
+                        <ColorSwatch
+                          key={color}
+                          type="button"
+                          $active={customQrColor === value}
+                          $color={color}
+                          $auto={color === "auto"}
+                          aria-label={label}
+                          aria-pressed={customQrColor === value}
+                          title={label}
+                          onClick={() => setCustomQrColor(value)}
+                        />
+                      );
+                    },
+                  )}
+                </ColorPalette>
               </ThemeField>
             ) : null}
 
