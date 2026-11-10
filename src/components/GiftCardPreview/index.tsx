@@ -73,4 +73,4 @@ export {
   GIFT_CARD_QR_SIZE,
   GIFT_CARD_WIDTH_REM,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
-export { default as CustomCard } from "@p2p-gifts/components/GiftCardPreview/CustomCard";
+export { default as GiftCard } from "@p2p-gifts/components/GiftCardPreview/GiftCard";

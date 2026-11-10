@@ -19,7 +19,7 @@ import {
 } from "@p2p-gifts/components/ColorPalette";
 import { Container } from "@p2p-gifts/components/Containers";
 import GiftCardPreview, {
-  CustomCard,
+  GiftCard,
 } from "@p2p-gifts/components/GiftCardPreview";
 import GiftNoteEditor from "@p2p-gifts/components/GiftNoteEditor";
 import { Label } from "@p2p-gifts/components/Label";
@@ -454,7 +454,7 @@ const GenerateGiftCard = () => {
           <PreviewColumn>
             <PreviewHeading>Preview</PreviewHeading>
             <GiftCardPreview>
-              <CustomCard
+              <GiftCard
                 ref={cardExportRef}
                 backgroundImage={backgroundImage}
                 note={giftNote}

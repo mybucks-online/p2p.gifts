@@ -75,9 +75,9 @@ const CardQrInner = styled.div`
   }
 `;
 
-/** Custom background gift card — user image with branding, note, and QR */
-const CustomCard = forwardRef<HTMLDivElement, GiftCardProps>(
-  function CustomCard(
+/** Gift card with a template or uploaded background, branding, note, and QR */
+const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
+  function GiftCard(
     {
       backgroundImage,
       note = "",
@@ -113,4 +113,4 @@ const CustomCard = forwardRef<HTMLDivElement, GiftCardProps>(
   },
 );
 
-export default CustomCard;
+export default GiftCard;
