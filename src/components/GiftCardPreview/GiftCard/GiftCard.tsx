@@ -7,13 +7,16 @@ import {
   GIFT_CARD_QR_SIZE,
   GIFT_CARD_WIDTH_REM,
 } from "@p2p-gifts/components/GiftCardPreview/constants";
-import { resolveDefaultCardTheme } from "@p2p-gifts/components/GiftCardPreview/DefaultCard/themes";
 import GiftCardBrand from "@p2p-gifts/components/GiftCardPreview/GiftCardBrand";
 import GiftCardNote from "@p2p-gifts/components/GiftCardPreview/GiftCardNote";
 import { giftCardTextStyles } from "@p2p-gifts/components/GiftCardPreview/giftCardTextStyles";
+import {
+  DEFAULT_CARD_TEMPLATE_QR_COLOR,
+  DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
+} from "@p2p-gifts/data/cardTemplates";
 import type { GiftCardProps } from "@p2p-gifts/types/card";
 
-const CardRoot = styled.div<{ $from: string; $to: string }>`
+const CardRoot = styled.div<{ $textColor: string }>`
   width: ${GIFT_CARD_WIDTH_REM}rem;
   aspect-ratio: ${GIFT_CARD_ASPECT_RATIO};
   position: relative;
@@ -24,62 +27,38 @@ const CardRoot = styled.div<{ $from: string; $to: string }>`
   align-items: stretch;
   gap: ${({ theme }) => theme.sizes.sm};
   overflow: hidden;
-  color: ${({ theme }) => theme.colors.textInverse};
-  background: ${({ $from, $to }) =>
-    `linear-gradient(to bottom right, ${$from}, ${$to})`};
+  color: ${({ $textColor }) => $textColor};
+  background: #374151;
   line-height: normal;
   ${giftCardTextStyles}
 `;
 
-const GiftCardDecor = styled.div`
+const BackgroundImage = styled.img`
   position: absolute;
   inset: 0;
-  opacity: 0.1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   pointer-events: none;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    border: 2px solid white;
-  }
-
-  &::before {
-    top: 1rem;
-    right: 1rem;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-  }
-
-  &::after {
-    bottom: 1rem;
-    left: 1rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: ${({ theme }) => theme.radius.sm};
-    transform: rotate(45deg);
-  }
 `;
 
-const GiftCardLeft = styled.div`
+const CardLeft = styled.div`
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
-  padding-top: 1rem;
-  text-align: left;
-  min-width: 0;
   min-height: 0;
+  padding-top: 1rem;
+  min-width: 0;
 `;
 
-const GiftCardTop = styled.div`
+const CardTop = styled.div`
   flex-shrink: 0;
 `;
 
-const GiftCardQrInner = styled.div`
+const CardQrInner = styled.div`
   position: relative;
   z-index: 1;
   align-self: start;
@@ -96,33 +75,42 @@ const GiftCardQrInner = styled.div`
   }
 `;
 
-/** Default gradient gift card — first card format */
-const DefaultCard = forwardRef<HTMLDivElement, GiftCardProps>(
-  function DefaultCard({ theme, note = "", giftingLink }, ref) {
-    const { from, to } = resolveDefaultCardTheme(theme);
-
+/** Gift card with a template or uploaded background, branding, note, and QR */
+const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
+  function GiftCard(
+    {
+      backgroundImage,
+      note = "",
+      giftingLink,
+      qrColor = DEFAULT_CARD_TEMPLATE_QR_COLOR,
+      textColor = DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
+    },
+    ref,
+  ) {
     return (
-      <CardRoot ref={ref} $from={from} $to={to}>
-        <GiftCardDecor aria-hidden />
-        <GiftCardLeft>
-          <GiftCardTop>
-            <GiftCardBrand noteSpacing />
-          </GiftCardTop>
-          <GiftCardNote note={note} />
-        </GiftCardLeft>
+      <CardRoot ref={ref} $textColor={textColor}>
+        {backgroundImage ? (
+          <BackgroundImage src={backgroundImage} alt="" aria-hidden />
+        ) : null}
+        <CardLeft>
+          <CardTop>
+            <GiftCardBrand textShadow="0 1px 4px rgba(0, 0, 0, 0.55)" />
+          </CardTop>
+          <GiftCardNote note={note} shadow />
+        </CardLeft>
         {giftingLink ? (
-          <GiftCardQrInner>
+          <CardQrInner>
             <QRCodeSVG
               value={giftingLink}
               size={GIFT_CARD_QR_SIZE}
-              fgColor={to}
+              fgColor={qrColor}
               bgColor="#ffffff"
             />
-          </GiftCardQrInner>
+          </CardQrInner>
         ) : null}
       </CardRoot>
     );
   },
 );
 
-export default DefaultCard;
+export default GiftCard;

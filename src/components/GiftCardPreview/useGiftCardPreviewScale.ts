@@ -9,7 +9,9 @@ export function useGiftCardPreviewScale(
 
   useEffect(() => {
     const frame = frameRef.current;
-    if (!frame) return;
+    if (!frame) {
+      return;
+    }
 
     const updateScale = () => {
       const width = frame.getBoundingClientRect().width;

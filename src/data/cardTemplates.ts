@@ -13,6 +13,23 @@ export function isCardTemplateActive(template: CardTemplate): boolean {
 export const ACTIVE_CARD_TEMPLATES =
   CARD_TEMPLATES.filter(isCardTemplateActive);
 
+export const DEFAULT_CARD_TEMPLATE_ID = "general-gift-card";
+
+/** Template IDs select built-in backgrounds; an empty value selects an upload. */
+export const CARD_STYLE_GROUPS = [
+  {
+    label: "Built-in",
+    options: ACTIVE_CARD_TEMPLATES.map((template) => ({
+      value: template.id,
+      label: template.name,
+    })),
+  },
+  {
+    label: "Custom",
+    options: [{ value: "", label: "Upload your image" }],
+  },
+];
+
 export function getCardTemplateById(
   templateId: string | null | undefined,
 ): CardTemplate | null {
@@ -24,7 +41,9 @@ export function getCardTemplateById(
 export function getCardTemplateBackgroundUrl(
   template: CardTemplate | null | undefined,
 ): string {
-  if (!template?.backgroundImage) return "";
+  if (!template?.backgroundImage) {
+    return "";
+  }
 
   const { backgroundImage } = template;
   return backgroundImage.startsWith("/")
