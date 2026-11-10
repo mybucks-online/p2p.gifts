@@ -52,10 +52,14 @@ export function injectPngMetadata(
 
   const chunks: Uint8Array[] = [];
   for (const [keyword, text] of Object.entries(metadata)) {
-    if (text) chunks.push(buildTextChunk(keyword, text));
+    if (text) {
+      chunks.push(buildTextChunk(keyword, text));
+    }
   }
 
-  if (chunks.length === 0) return dataUrl;
+  if (chunks.length === 0) {
+    return dataUrl;
+  }
 
   const insertPos = original.length - IEND_CHUNK_LENGTH;
   const totalExtra = chunks.reduce((sum, c) => sum + c.length, 0);

@@ -20,9 +20,15 @@ const Segment = styled.div<{ $filled: boolean; $tier: Tier }>`
   min-width: 0;
   border-radius: 1px;
   background: ${({ $filled, $tier, theme }) => {
-    if (!$filled) return "transparent";
-    if ($tier === "strong") return theme.colors.success;
-    if ($tier === "medium") return theme.colors.warning;
+    if (!$filled) {
+      return "transparent";
+    }
+    if ($tier === "strong") {
+      return theme.colors.success;
+    }
+    if ($tier === "medium") {
+      return theme.colors.warning;
+    }
     return theme.colors.error;
   }};
   transition: background 0.15s ease;

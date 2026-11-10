@@ -344,7 +344,9 @@ const GenerateGiftCard = () => {
 
   const handleCustomImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      return;
+    }
 
     if (file.type === "image/svg+xml") {
       toast("SVG is not supported. Please use PNG, JPG, or WebP.");
@@ -380,7 +382,9 @@ const GenerateGiftCard = () => {
   };
 
   const handleDownloadImage = async () => {
-    if (!cardExportRef.current || downloading) return;
+    if (!cardExportRef.current || downloading) {
+      return;
+    }
     if (!backgroundImage) {
       toast("Upload a background image first.");
       return;
@@ -415,7 +419,9 @@ const GenerateGiftCard = () => {
   };
 
   const handleDownloadQrCode = async () => {
-    if (!giftingLink || downloadingQr) return;
+    if (!giftingLink || downloadingQr) {
+      return;
+    }
 
     const canvas = qrExportRef.current;
     if (!canvas) {

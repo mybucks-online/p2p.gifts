@@ -89,7 +89,9 @@ function waitForImages(root: HTMLElement): Promise<void[]> {
 }
 
 async function waitForFonts(cardElement: HTMLElement): Promise<void> {
-  if (!document.fonts) return;
+  if (!document.fonts) {
+    return;
+  }
 
   const rootFontSize = parseFloat(
     getComputedStyle(document.documentElement).fontSize,

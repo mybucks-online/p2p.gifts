@@ -151,7 +151,9 @@ const CreateWallet = () => {
   const [pinFocused, setPinFocused] = useState(false);
 
   const passphraseStrength = useMemo(() => {
-    if (!passphrase) return 0;
+    if (!passphrase) {
+      return 0;
+    }
     const { score } = zxcvbn(passphrase);
     if (passphrase.length < PASSPHRASE_MIN_LENGTH) {
       return Math.min(score, PASSPHRASE_MIN_ZXCVBN_SCORE - 1);
@@ -160,7 +162,9 @@ const CreateWallet = () => {
   }, [passphrase]);
 
   const pinStrength = useMemo(() => {
-    if (!pin || pin.length < PIN_MIN_LENGTH) return 0;
+    if (!pin || pin.length < PIN_MIN_LENGTH) {
+      return 0;
+    }
     const { score } = zxcvbn(pin);
     return score < 2 ? score : 2;
   }, [pin]);

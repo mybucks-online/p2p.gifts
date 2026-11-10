@@ -28,6 +28,7 @@ export default [
     settings: { react: { version: "18.2" } },
     plugins: ["react", "react-hooks", "simple-import-sort", "import"],
     rules: {
+      curly: ["error", "all"],
       "react/react-in-jsx-scope": "off",
       "react/jsx-no-target-blank": "off",
       "no-unused-vars": "warn",

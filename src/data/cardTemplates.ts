@@ -41,7 +41,9 @@ export function getCardTemplateById(
 export function getCardTemplateBackgroundUrl(
   template: CardTemplate | null | undefined,
 ): string {
-  if (!template?.backgroundImage) return "";
+  if (!template?.backgroundImage) {
+    return "";
+  }
 
   const { backgroundImage } = template;
   return backgroundImage.startsWith("/")

@@ -171,7 +171,9 @@ export default function GiftNoteEditor({
     },
   });
 
-  if (!editor) return null;
+  if (!editor) {
+    return null;
+  }
 
   const textStyle = editor.getAttributes("textStyle");
   const activeColor = textStyle.color || "auto";
