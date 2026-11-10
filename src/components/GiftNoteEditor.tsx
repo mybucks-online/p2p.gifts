@@ -144,12 +144,12 @@ const Content = styled(EditorContent)`
 
 const FONT_FAMILIES = [
   ["Arial", "Arial"],
-  ["Inter", "Inter"],
-  ["Pacifico", "Pacifico"],
+  ["Dancing Script", "Dancing Script"],
   ["Fredoka", "Fredoka"],
   ["Grand Hotel", "Grand Hotel"],
-  ["Dancing Script", "Dancing Script"],
+  ["Inter", "Inter"],
   ["Montserrat", "Montserrat"],
+  ["Pacifico", "Pacifico"],
   ["Poppins", "Poppins"],
 ];
 
