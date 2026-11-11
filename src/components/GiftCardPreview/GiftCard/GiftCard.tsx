@@ -96,7 +96,7 @@ const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
           <CardTop>
             <GiftCardBrand textShadow="0 1px 4px rgba(0, 0, 0, 0.55)" />
           </CardTop>
-          <GiftCardNote note={note} shadow />
+          <GiftCardNote note={note} />
         </CardLeft>
         {giftingLink ? (
           <CardQrInner>
