@@ -5,12 +5,6 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import styled from "styled-components";
 
-import {
-  ColorPalette,
-  COLORS,
-  ColorSwatch,
-} from "@p2p-gifts/components/ColorPalette";
-
 const EditorRoot = styled.div`
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.border};
@@ -155,7 +149,7 @@ export default function GiftNoteEditor({
         link: false,
         orderedList: false,
       }),
-      TextStyleKit,
+      TextStyleKit.configure({ color: false }),
       Placeholder.configure({
         placeholder: "Write a personal gift note",
       }),
@@ -176,7 +170,6 @@ export default function GiftNoteEditor({
   }
 
   const textStyle = editor.getAttributes("textStyle");
-  const activeColor = textStyle.color || "auto";
   const activeFontFamily = textStyle.fontFamily || "Inter";
   const activeFontSize = textStyle.fontSize || "16px";
 
@@ -252,26 +245,6 @@ export default function GiftNoteEditor({
         >
           <em>I</em>
         </ToolbarButton>
-        <ColorPalette role="group" aria-label="Text color palette">
-          {COLORS.map(([color, label]) => (
-            <ColorSwatch
-              key={color}
-              type="button"
-              $active={activeColor === color}
-              $color={color === "auto" ? "transparent" : color}
-              $auto={color === "auto"}
-              aria-label={label}
-              aria-pressed={activeColor === color}
-              title={label}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => {
-                runFormattingCommand((chain) =>
-                  color === "auto" ? chain.unsetColor() : chain.setColor(color),
-                );
-              }}
-            />
-          ))}
-        </ColorPalette>
       </Toolbar>
       <Content editor={editor} />
     </EditorRoot>
