@@ -76,41 +76,39 @@ const CardQrInner = styled.div`
 `;
 
 /** Gift card with a template or uploaded background, branding, note, and QR */
-const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
-  function GiftCard(
-    {
-      backgroundImage,
-      note = "",
-      giftingLink,
-      qrColor = DEFAULT_CARD_TEMPLATE_QR_COLOR,
-      textColor = DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
-    },
-    ref,
-  ) {
-    return (
-      <CardRoot ref={ref} $textColor={textColor}>
-        {backgroundImage ? (
-          <BackgroundImage src={backgroundImage} alt="" aria-hidden />
-        ) : null}
-        <CardLeft>
-          <CardTop>
-            <GiftCardBrand textShadow="0 1px 4px rgba(0, 0, 0, 0.55)" />
-          </CardTop>
-          <GiftCardNote note={note} />
-        </CardLeft>
-        {giftingLink ? (
-          <CardQrInner>
-            <QRCodeSVG
-              value={giftingLink}
-              size={GIFT_CARD_QR_SIZE}
-              fgColor={qrColor}
-              bgColor="#ffffff"
-            />
-          </CardQrInner>
-        ) : null}
-      </CardRoot>
-    );
+const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(function GiftCard(
+  {
+    backgroundImage,
+    note = "",
+    giftingLink,
+    qrColor = DEFAULT_CARD_TEMPLATE_QR_COLOR,
+    textColor = DEFAULT_CARD_TEMPLATE_TEXT_COLOR,
   },
-);
+  ref,
+) {
+  return (
+    <CardRoot ref={ref} $textColor={textColor}>
+      {backgroundImage ? (
+        <BackgroundImage src={backgroundImage} alt="" aria-hidden />
+      ) : null}
+      <CardLeft>
+        <CardTop>
+          <GiftCardBrand textShadow="0 1px 4px rgba(0, 0, 0, 0.55)" />
+        </CardTop>
+        <GiftCardNote note={note} />
+      </CardLeft>
+      {giftingLink ? (
+        <CardQrInner>
+          <QRCodeSVG
+            value={giftingLink}
+            size={GIFT_CARD_QR_SIZE}
+            fgColor={qrColor}
+            bgColor="#ffffff"
+          />
+        </CardQrInner>
+      ) : null}
+    </CardRoot>
+  );
+});
 
 export default GiftCard;

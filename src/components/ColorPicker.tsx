@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const ColorPalette = styled.div`
+const ColorPalette = styled.div`
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.sizes.x3s};
 `;
 
-export const ColorSwatch = styled.button<{
+const ColorSwatch = styled.button<{
   $active: boolean;
   $color: string;
   $auto: boolean;
@@ -30,7 +30,7 @@ export const ColorSwatch = styled.button<{
   }
 `;
 
-export const COLORS = [
+const COLORS = [
   ["auto", "Auto"],
   ["#0f172a", "Slate"],
   ["#dc2626", "Red"],
@@ -43,3 +43,37 @@ export const COLORS = [
   ["#db2777", "Pink"],
   ["#ffffff", "White"],
 ];
+
+interface ColorPickerProps {
+  value: string;
+  onChange: (color: string) => void;
+  labelledBy: string;
+  allowWhite?: boolean;
+}
+
+export default function ColorPicker({
+  value,
+  onChange,
+  labelledBy,
+  allowWhite = true,
+}: ColorPickerProps) {
+  return (
+    <ColorPalette role="group" aria-labelledby={labelledBy}>
+      {COLORS.filter(([color]) => allowWhite || color !== "#ffffff").map(
+        ([color, label]) => (
+          <ColorSwatch
+            key={color}
+            type="button"
+            $active={value === color}
+            $color={color === "auto" ? "transparent" : color}
+            $auto={color === "auto"}
+            aria-label={label}
+            aria-pressed={value === color}
+            title={label}
+            onClick={() => onChange(color)}
+          />
+        ),
+      )}
+    </ColorPalette>
+  );
+}

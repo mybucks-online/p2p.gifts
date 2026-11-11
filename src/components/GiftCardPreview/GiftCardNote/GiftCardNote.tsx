@@ -8,7 +8,6 @@ interface GiftCardNoteProps {
 
 const noteTypography = css`
   ${giftCardTextStyles}
-  width: 100%;
   margin: ${({ theme }) => theme.sizes.sm} 0 0;
   padding: 0;
   text-align: left;
@@ -159,7 +158,5 @@ export default function GiftCardNote({ note = "" }: GiftCardNoteProps) {
     );
   }
 
-  return (
-    <NoteRoot $shadow dangerouslySetInnerHTML={{ __html: note }} />
-  );
+  return <NoteRoot $shadow dangerouslySetInnerHTML={{ __html: note }} />;
 }

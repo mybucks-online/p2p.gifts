@@ -12,11 +12,7 @@ import styled from "styled-components";
 
 import { BackIcon } from "@p2p-gifts/assets/icons";
 import Button from "@p2p-gifts/components/Button";
-import {
-  ColorPalette,
-  COLORS,
-  ColorSwatch,
-} from "@p2p-gifts/components/ColorPalette";
+import ColorPicker from "@p2p-gifts/components/ColorPicker";
 import { Container } from "@p2p-gifts/components/Containers";
 import GiftCardPreview, {
   GiftCard,
@@ -33,7 +29,6 @@ import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
 import {
   CARD_STYLE_GROUPS,
   DEFAULT_CARD_TEMPLATE_ID,
-  DEFAULT_CARD_TEMPLATE_QR_COLOR,
   getCardTemplateBackgroundUrl,
   getCardTemplateById,
   getCardTemplateQrColor,
@@ -315,11 +310,10 @@ const GenerateGiftCard = () => {
   const [cardStyle, setCardStyle] = useState(DEFAULT_CARD_TEMPLATE_ID);
   const activeTemplate = getCardTemplateById(cardStyle);
   const [giftNote, setGiftNote] = useState("");
+  const [textColor, setTextColor] = useState("auto");
   const [customBackgroundImage, setCustomBackgroundImage] = useState("");
   const [customImageName, setCustomImageName] = useState("");
-  const [customQrColor, setCustomQrColor] = useState(
-    DEFAULT_CARD_TEMPLATE_QR_COLOR,
-  );
+  const [qrColor, setQrColor] = useState("auto");
   const [downloading, setDownloading] = useState(false);
   const [downloadingQr, setDownloadingQr] = useState(false);
   const cardExportRef = useRef<HTMLDivElement>(null);
@@ -328,9 +322,10 @@ const GenerateGiftCard = () => {
   const backgroundImage = activeTemplate
     ? getCardTemplateBackgroundUrl(activeTemplate)
     : customBackgroundImage;
-  const qrFgColor = isUploadCustom
-    ? customQrColor
-    : getCardTemplateQrColor(activeTemplate);
+  const qrFgColor =
+    qrColor === "auto" ? getCardTemplateQrColor(activeTemplate) : qrColor;
+  const cardTextColor =
+    textColor === "auto" ? getCardTemplateTextColor(activeTemplate) : textColor;
 
   useEffect(() => {
     if (giftingLink) {
@@ -460,7 +455,7 @@ const GenerateGiftCard = () => {
                 note={giftNote}
                 giftingLink={giftingLink}
                 qrColor={qrFgColor}
-                textColor={getCardTemplateTextColor(activeTemplate)}
+                textColor={cardTextColor}
               />
             </GiftCardPreview>
             {giftingLink ? (
@@ -543,37 +538,24 @@ const GenerateGiftCard = () => {
               </ThemeField>
             ) : null}
 
-            {isUploadCustom ? (
-              <ThemeField>
-                <Label id="gift-card-qr-color-label">QR Code Color</Label>
-                <ColorPalette
-                  role="group"
-                  aria-labelledby="gift-card-qr-color-label"
-                >
-                  {COLORS.filter(([color]) => color !== "#ffffff").map(
-                    ([color, label]) => {
-                      const value =
-                        color === "auto"
-                          ? DEFAULT_CARD_TEMPLATE_QR_COLOR
-                          : color;
-                      return (
-                        <ColorSwatch
-                          key={color}
-                          type="button"
-                          $active={customQrColor === value}
-                          $color={color}
-                          $auto={color === "auto"}
-                          aria-label={label}
-                          aria-pressed={customQrColor === value}
-                          title={label}
-                          onClick={() => setCustomQrColor(value)}
-                        />
-                      );
-                    },
-                  )}
-                </ColorPalette>
-              </ThemeField>
-            ) : null}
+            <ThemeField>
+              <Label id="gift-card-qr-color-label">QR Code Color</Label>
+              <ColorPicker
+                labelledBy="gift-card-qr-color-label"
+                value={qrColor}
+                onChange={setQrColor}
+                allowWhite={false}
+              />
+            </ThemeField>
+
+            <ThemeField>
+              <Label id="gift-card-text-color-label">Text Color</Label>
+              <ColorPicker
+                labelledBy="gift-card-text-color-label"
+                value={textColor}
+                onChange={setTextColor}
+              />
+            </ThemeField>
 
             <GiftNoteField>
               <Label>Gift Note</Label>
