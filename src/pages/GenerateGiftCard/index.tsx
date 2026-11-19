@@ -303,8 +303,6 @@ const QrExportHost = styled.div`
   pointer-events: none;
 `;
 
-const MAX_CUSTOM_IMAGE_BYTES = 8 * 1024 * 1024;
-
 const GenerateGiftCard = () => {
   const { setActiveStep, giftingLink } = useContext(StoreContext);
   const [cardStyle, setCardStyle] = useState(DEFAULT_CARD_TEMPLATE_ID);
@@ -351,12 +349,6 @@ const GenerateGiftCard = () => {
 
     if (!file.type.startsWith("image/")) {
       toast("Please choose an image file.");
-      event.target.value = "";
-      return;
-    }
-
-    if (file.size > MAX_CUSTOM_IMAGE_BYTES) {
-      toast("Image must be 8 MB or smaller.");
       event.target.value = "";
       return;
     }
@@ -532,7 +524,7 @@ const GenerateGiftCard = () => {
                 </FileUploadButton>
                 <FileHintRow>
                   <FileNameHint>
-                    {customImageName || "PNG or JPG, up to 8 MB"}
+                    {customImageName || "PNG, JPG, or WebP"}
                   </FileNameHint>
                 </FileHintRow>
               </ThemeField>
