@@ -226,6 +226,13 @@ const GiftNoteField = styled.div`
   width: 100%;
 `;
 
+const GiftNoteHint = styled.p`
+  margin: ${({ theme }) => theme.sizes.x3s} 0 0;
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.4;
+`;
+
 const HiddenFileInput = styled.input`
   display: none;
 `;
@@ -552,6 +559,9 @@ const GenerateGiftCard = () => {
             <GiftNoteField>
               <Label>Gift Note</Label>
               <GiftNoteEditor onChange={setGiftNote} />
+              <GiftNoteHint>
+                Use spaces and line breaks to position your gift note.
+              </GiftNoteHint>
             </GiftNoteField>
 
             <ActionButtons>
