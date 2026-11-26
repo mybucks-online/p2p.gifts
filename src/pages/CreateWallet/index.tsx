@@ -309,7 +309,12 @@ const CreateWallet = () => {
           Please do not refresh the page before downloading your gift card!
         </InfoCallout>
 
-        <Button onClick={onSubmit} disabled={hasInvalidInput} $size="block">
+        <Button
+          onClick={onSubmit}
+          disabled={hasInvalidInput}
+          $size="block"
+          data-umami-event="create-wallet"
+        >
           Create Wallet
         </Button>
       </CreateWalletContainer>
