@@ -244,6 +244,8 @@ const Fund = () => {
         </InfoCallout>
 
         <Button
+          type="button"
+          $variant="primary"
           onClick={proceedToGiftCard}
           $size="block"
           data-umami-event="proceed-to-gift-card"
