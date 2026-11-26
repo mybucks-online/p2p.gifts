@@ -125,17 +125,12 @@ const Tagline = styled.p`
 
 const ValueText = styled.p`
   margin: 0;
-  max-width: 36rem;
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   line-height: 1.6;
   color: ${({ theme }) => theme.colors.textMuted};
 
-  ${media.sm`
-    font-size: ${({ theme }) => theme.fontSize.lg};
-  `}
-
   @media (min-width: 992px) {
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSize.base};
   }
 `;
 
@@ -146,36 +141,6 @@ const CtaSection = styled.div`
   gap: ${({ theme }) => theme.sizes.x2l};
   width: 100%;
   padding-top: ${({ theme }) => theme.sizes.x2l};
-`;
-
-const CtaBlock = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.sizes.base};
-  width: 100%;
-`;
-
-const HowItWorksButton = styled(Button).attrs({
-  $variant: "outline",
-})`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.sizes.x3s};
-  text-decoration: none;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.textInverse};
-    background-color: ${({ theme }) => theme.colors.primary};
-  }
 `;
 
 const PoweredBy = styled.p`
@@ -243,33 +208,18 @@ const Welcome = () => {
           <TitleBlock>
             <Title>p2p.gifts</Title>
             <Tagline>Peer-to-peer crypto gifting wizard</Tagline>
+            <ValueText>Free. No signup. No app install. Instant claim.</ValueText>
           </TitleBlock>
         </LogoSection>
 
-        <ValueText>
-          Gift crypto to your community or friends — no signup, no app install,
-          instant claim.
-        </ValueText>
-
         <CtaSection>
-          <CtaBlock>
-            <Button
-              type="button"
-              onClick={goToCreateWallet}
-              data-umami-event="start-gifting"
-            >
-              🎁 Start Gifting
-            </Button>
-            <HowItWorksButton
-              as="a"
-              href={HOW_IT_WORKS.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span aria-hidden="true">📖</span>
-              {HOW_IT_WORKS.label}
-            </HowItWorksButton>
-          </CtaBlock>
+          <Button
+            type="button"
+            onClick={goToCreateWallet}
+            data-umami-event="start-gifting"
+          >
+            🎁 Create a Gift Card
+          </Button>
           <PoweredBy>
             Powered by{" "}
             <a href={POWERED_BY.url} target="_blank" rel="noopener noreferrer">
@@ -277,7 +227,7 @@ const Welcome = () => {
             </a>
           </PoweredBy>
           <LegalNav aria-label="Legal">
-            {LEGAL_LINKS.map((link, index) => (
+            {[HOW_IT_WORKS, ...LEGAL_LINKS].map((link, index) => (
               <span key={link.href}>
                 {index > 0 && <span aria-hidden> | </span>}
                 <a href={link.href} target="_blank" rel="noopener noreferrer">
