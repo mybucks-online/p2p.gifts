@@ -17,11 +17,12 @@ export const POWERED_BY = Object.freeze({
 /** p2p.gifts legal pages on GitBook */
 export const DOCS_ORIGIN = "https://docs.mybucks.online";
 
+export const HOW_IT_WORKS = Object.freeze({
+  label: "How it works",
+  href: `${DOCS_ORIGIN}/p2p.gifts/how-it-works`,
+});
+
 export const LEGAL_LINKS = Object.freeze([
-  {
-    label: "How it works",
-    href: `${DOCS_ORIGIN}/p2p.gifts/how-it-works`,
-  },
   {
     label: "Terms of Use",
     href: `${DOCS_ORIGIN}/p2p.gifts/terms-of-use`,

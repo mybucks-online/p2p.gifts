@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "@p2p-gifts/components/Button";
 import WelcomeSocialBar from "@p2p-gifts/components/WelcomeSocialBar";
 import { StoreContext, WIZARD_STEP } from "@p2p-gifts/contexts/Store";
-import { LEGAL_LINKS, POWERED_BY } from "@p2p-gifts/lib/site";
+import { HOW_IT_WORKS, LEGAL_LINKS, POWERED_BY } from "@p2p-gifts/lib/site";
 import media from "@p2p-gifts/styles/media";
 
 const WelcomeScreen = styled.main`
@@ -158,7 +158,7 @@ const CtaBlock = styled.div`
   width: 100%;
 `;
 
-const DemoButton = styled(Button).attrs({
+const HowItWorksButton = styled(Button).attrs({
   $variant: "outline",
 })`
   display: inline-flex;
@@ -260,14 +260,15 @@ const Welcome = () => {
             <Button type="button" onClick={goToCreateWallet}>
               🎁 Start Gifting
             </Button>
-            <DemoButton
+            <HowItWorksButton
               as="a"
-              href="https://app.arcade.software/share/cKcDkM4md7f3zcRbbheR"
+              href={HOW_IT_WORKS.href}
               target="_blank"
               rel="noopener noreferrer"
             >
-              ▶️ Watch Demo
-            </DemoButton>
+              <span aria-hidden="true">📖</span>
+              {HOW_IT_WORKS.label}
+            </HowItWorksButton>
           </CtaBlock>
           <PoweredBy>
             Powered by{" "}
@@ -275,7 +276,7 @@ const Welcome = () => {
               {POWERED_BY.label}
             </a>
           </PoweredBy>
-          <LegalNav aria-label="Documentation and legal">
+          <LegalNav aria-label="Legal">
             {LEGAL_LINKS.map((link, index) => (
               <span key={link.href}>
                 {index > 0 && <span aria-hidden> | </span>}
