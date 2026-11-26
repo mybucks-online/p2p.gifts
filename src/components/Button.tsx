@@ -54,7 +54,8 @@ const Button = styled.button<ButtonProps>`
               border: none;
             `
           : css`
-              background: linear-gradient(
+              background-color: ${({ theme }) => theme.colors.primary};
+              background-image: linear-gradient(
                 to right,
                 ${({ theme }) => theme.colors.primary},
                 ${({ theme }) => theme.colors.accent}
@@ -66,7 +67,9 @@ const Button = styled.button<ButtonProps>`
                 background 0.2s ease;
 
               &:hover:not(:disabled) {
-                background: linear-gradient(
+                background-color: ${({ theme }) =>
+                  theme.colors.primaryHoverFrom};
+                background-image: linear-gradient(
                   to right,
                   ${({ theme }) => theme.colors.primaryHoverFrom},
                   ${({ theme }) => theme.colors.primaryHoverTo}

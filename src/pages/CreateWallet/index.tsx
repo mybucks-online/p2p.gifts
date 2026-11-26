@@ -225,7 +225,7 @@ const CreateWallet = () => {
         <Header>
           <WizardStepTitle step={1}>Secure Your Gift Wallet</WizardStepTitle>
           <WizardStepSummary>
-            Auto-generated for security. No need to remember.
+            Auto-generated for security. No backup required.
           </WizardStepSummary>
         </Header>
 
