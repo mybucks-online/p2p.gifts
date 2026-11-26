@@ -243,7 +243,11 @@ const Fund = () => {
           fees when you send other tokens as well.
         </InfoCallout>
 
-        <Button onClick={proceedToGiftCard} $size="block">
+        <Button
+          onClick={proceedToGiftCard}
+          $size="block"
+          data-umami-event="proceed-to-gift-card"
+        >
           Proceed
         </Button>
       </FundStack>

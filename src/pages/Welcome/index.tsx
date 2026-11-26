@@ -257,7 +257,11 @@ const Welcome = () => {
 
         <CtaSection>
           <CtaBlock>
-            <Button type="button" onClick={goToCreateWallet}>
+            <Button
+              type="button"
+              onClick={goToCreateWallet}
+              data-umami-event="start-gifting"
+            >
               🎁 Start Gifting
             </Button>
             <HowItWorksButton
