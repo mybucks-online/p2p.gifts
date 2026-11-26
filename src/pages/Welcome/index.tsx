@@ -170,15 +170,11 @@ const HowItWorksButton = styled(Button).attrs({
   cursor: pointer;
   transition:
     color 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
+    background-color 0.2s ease;
 
   &:hover {
     color: ${({ theme }) => theme.colors.textInverse};
     background-color: ${({ theme }) => theme.colors.primary};
-    border-color: ${({ theme }) => theme.colors.primary};
-    transform: scale(1.02);
   }
 `;
 
