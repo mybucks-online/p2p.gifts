@@ -208,7 +208,9 @@ const Welcome = () => {
           <TitleBlock>
             <Title>p2p.gifts</Title>
             <Tagline>Peer-to-peer crypto gifting wizard</Tagline>
-            <ValueText>Free. No signup. No app install. Instant claim.</ValueText>
+            <ValueText>
+              Free. No signup. No app install. Instant claim.
+            </ValueText>
           </TitleBlock>
         </LogoSection>
 
