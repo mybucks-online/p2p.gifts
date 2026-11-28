@@ -393,27 +393,28 @@ const templatePreviews = new Map([
   ["crypto-gradient", "crypto-gradient"],
 ]);
 
+const customGiftPreview = {
+  src: "/previews/custom-gift-card.png",
+  alt: "Custom gift card example",
+};
+
 const galleryPreviews = ACTIVE_CARD_TEMPLATES.flatMap(({ id, name }) => {
   const preview = templatePreviews.get(id);
   return preview ? [{ src: `/previews/${preview}.png`, alt: name }] : [];
-}).concat({
-  src: "/previews/custom-gift-card.png",
-  alt: "Custom gift card example",
-});
+})
+  .reverse()
+  .concat(customGiftPreview);
 
 const repositoryUrl = "https://github.com/mybucks-online/p2p.gifts";
 
-const heroPreviews = [
-  "merry-christmas",
-  "happy-birthday",
-  "good-luck",
-  "custom-gift-card",
-].flatMap((name) => {
-  const preview = galleryPreviews.find(
-    ({ src }) => src === `/previews/${name}.png`,
-  );
-  return preview ? [preview] : [];
-});
+const heroPreviews = ["merry-christmas", "happy-birthday", "good-luck"]
+  .flatMap((name) => {
+    const preview = galleryPreviews.find(
+      ({ src }) => src === `/previews/${name}.png`,
+    );
+    return preview ? [preview] : [];
+  })
+  .concat(customGiftPreview);
 
 const Welcome = () => {
   const { setActiveStep } = useContext(StoreContext);
